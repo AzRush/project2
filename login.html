@@ -1,0 +1,50 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <title>Login</title>
+
+
+    <link rel="stylesheet"  type="text/css" href="css/reset.css">
+    <link rel="stylesheet"  type="text/css" href="css/global.css">
+    <link rel="stylesheet"  type="text/css" href="css/login.css">
+    <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
+    <script src="javaScript/header.js"></script>
+    <script src="javaScript/cookie_manage.js"></script>
+</head>
+<body onload="nav_create();problem_set();">
+<div id="header" >
+    <header>
+        <a href="homepage.php"><img src="images/logo.png"></a>
+        <span>LIFE IS BEAUTIFUL</span>
+        <nav id="nav">
+
+        </nav>
+    </header>
+</div>
+<section>
+    <form action="#" method="post" target="frameFile">
+        <p>
+            Username<br>
+            <input type="text" name="username" id="username" onchange="username_check()" pattern="([0-9]|[a-z]|[A-Z]|&#95){1,}"><span id = "username_check">Username Required</span>
+        </p>
+        <p>
+            Password<br>
+            <input type="password" name="password" id="password" onchange="password_check()"><span id = "password_check">Password Required</span>
+        </p>
+
+        <p>
+            <span id="problem">1 + 3 = ?</span> <input type="button" value="Refresh" onclick="problem_set()">
+            <br>
+            <input type="text" name="captcha" id = "captcha" onchange="captcha_check()"><span id = "captcha_check">Answer required</span>
+        <p>
+            <input type="submit" value="Login" name="login" onclick="login_check()" onsubmit="null">
+        </p>
+    </form>
+    <iframe name='frameFile' style='display: none;'></iframe>
+</section>
+
+<div id="br"></div>
+<footer><span>Copyright © 2019 Az Rush. All rights reserved.</span></footer>
+</body>
+</html>

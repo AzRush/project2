@@ -1,0 +1,65 @@
+section
+{
+
+    position: relative;
+    display: block;
+    width: 70em;
+    height: auto;
+    margin: 2em auto 2em auto ;
+    padding-bottom: 1em;
+    background-color: #fff2c1;
+}
+section h1
+{
+    position: relative;
+    text-align: left;
+    margin-left: 3em;
+    padding-top: 1em;
+    margin-bottom: 0.5em;
+}
+section table
+{
+    display: block;
+    position: relative;
+
+    background: #fff69b;
+    width:50em;
+    margin:0em auto 0.5em auto;
+    padding:0em auto 0.5em auto;
+}
+
+
+section td
+{
+    min-width: 20em;
+
+}
+section img
+ {
+     width:10em;
+     height:7em;
+     margin: 1em 0;
+
+ }
+section p
+{
+    text-align: left;
+    font-size: 1em;
+}
+section button {
+    display:inline-block;
+    margin:0 8em 0 0;
+    -webkit-transition-duration: 0.2s; /* Safari */
+    transition-duration: 0.2s;
+    background-color: #ff2d1f;
+    border-collapse: collapse;
+    border-color: transparent;
+    border-radius: 0.4em;
+    color: #f8dce1;
+}
+
+section button:hover {
+    background-color: #eeff3d; /* Green */
+    color: orangered;
+}
+
