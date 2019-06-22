@@ -1,5 +1,12 @@
 <?php
-include 'php/database_connect.php';
+session_start();
+if(isset($_SESSION['user']))
+{
+    echo "<script> console.log("."234234234" . ")</script>";
+}
+else{
+    echo "<script> console.log("."124214234" . ")</script>";
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -12,6 +19,7 @@ include 'php/database_connect.php';
     <link rel="stylesheet"  type="text/css" href="css/homePage.css">
     <script src="javaScript/header.js"></script>
     <script src="javaScript/cookie_manage.js"></script>
+    <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/register.js"></script>
 </head>
@@ -251,7 +259,7 @@ include 'php/database_connect.php';
         </aside>
     </section>
 
-    <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
+
     <script type="text/javascript">
         $(function(){
             var oDiv = $("#play");  //外部盒子

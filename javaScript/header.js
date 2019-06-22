@@ -79,6 +79,15 @@ nav_create = function ()
 };
 logout = function()
 {
+    $.ajax({
+        type: "POST",
+        url: "php/login_check.php",
+        data:{method : "logout"},
+        dataType: "json",
+        error:function(e) {
+            alert(e.response);
+        }
+        });
     setCookie("username","",0);
     nav_create();
 }

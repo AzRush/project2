@@ -101,35 +101,64 @@ login_check = function ()
     }
     let username1 = document.getElementById("username");
     let password1 = document.getElementById("password");
-    let login_valid = 0;
-    let username_found = 0;
-    for (let i = 0; i < username.length; i++)
-    {
-        if(username[i] === username1.value)
-        {
-            username_found = 1;
-            if(password1.value == password[i])
-            {
-                login_valid= 1;
-                window.alert("Login as " + username[i]);
-                setCookie("username",username[i],"1");
-                nav_create();
-                login_close();
-                // window.history.back(-1);
-                break;
+    $.ajax({
+        type: "POST",
+        url: "php/login_check.php",
+        contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+        data: {method: "login" , username:$(username1).val(), password:$(password1).val()},
+        dataType: "json",
 
-            }
-        }
-    }
-    if(!username_found)
-    {
-        window.alert("Username not found!");
-        return;
-    }
-    if(login_valid == 0)
-    {
-        window.alert("Failed!");
-    }
+        error:function(e){
+                 if(e.response == "Success")
+                 {
+                    alert("Login as " + username1.value);
+                    setCookie("username",username1.value,"1");
+                    nav_create();
+                    login_close();
+                 }
+                 else
+                 {
+                     alert(e.response);
+                     problem_set();
+                     document.getElementById("captcha").value = '';
+                     captcha_check();
+                 }
+             }
+});
+
+    // let login_form = document.getElementById("login_form");
+    // login_form.submit();
+    // let username1 = document.getElementById("username");
+    // let password1 = document.getElementById("password");
+    // let login_valid = 0;
+    // let username_found = 0;
+    // for (let i = 0; i < username.length; i++)
+    // {
+    //     if(username[i] === username1.value)
+    //     {
+    //         username_found = 1;
+    //         if(password1.value == password[i])
+    //         {
+    //             login_valid= 1;
+    //             window.alert("Login as " + username[i]);
+    //             setCookie("username",username[i],"1");
+    //             nav_create();
+    //             login_close();
+    //             // window.history.back(-1);
+    //             break;
+    //
+    //         }
+    //     }
+    // }
+    // if(!username_found)
+    // {
+    //     window.alert("Username not found!");
+    //     return;
+    // }
+    // if(login_valid == 0)
+    // {
+    //     window.alert("Failed!");
+    // }
 
 };
 login_close = function ()

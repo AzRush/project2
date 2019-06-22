@@ -1,4 +1,11 @@
 <?php
+session_start();
+if(!isset($_SESSION['user']))
+{
+    echo "<script>alert('Please login first!');window.history.back();</script>";
+}
+?>
+<?php
 include 'php/database_connect.php';
 ?>
 <!DOCTYPE html>

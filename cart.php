@@ -1,3 +1,13 @@
+<?php
+session_start();
+if(isset($_SESSION['user']))
+{
+    echo "<script> console.log("."324234234" . ")</script>";
+}
+else{
+    echo "<script> console.log("."124214234" . ")</script>";
+}
+?>
 <!DOCTYPE html>
 <html lang="en">
 <head>
