@@ -2,32 +2,7 @@
 <project version="4">
   <component name="ChangeListManager">
     <list default="true" id="d49b0e95-6c8b-4ef2-8829-fa46aafbf903" name="Default Changelist" comment="">
-      <change afterPath="$PROJECT_DIR$/release.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/.idea/workspace.xml" beforeDir="false" afterPath="$PROJECT_DIR$/.idea/workspace.xml" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/display/style.css" beforeDir="false" afterPath="$PROJECT_DIR$/display/style.css" afterDir="false" />
       <change beforePath="$PROJECT_DIR$/homepage.php" beforeDir="false" afterPath="$PROJECT_DIR$/homepage.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/15.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/16.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/173.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/177.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/178.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/18.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/288.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/294.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/347.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/35.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/363.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/37.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/376.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/377.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/405.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/423.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/450.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/85.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/img/97.jpg" beforeDir="false" />
-      <change beforePath="$PROJECT_DIR$/javaScript/artwork_delete.js" beforeDir="false" afterPath="$PROJECT_DIR$/javaScript/artwork_delete.js" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/myZone.php" beforeDir="false" afterPath="$PROJECT_DIR$/myZone.php" afterDir="false" />
-      <change beforePath="$PROJECT_DIR$/php/artwork_delete.php" beforeDir="false" afterPath="$PROJECT_DIR$/php/artwork_delete.php" afterDir="false" />
     </list>
     <ignored path="$PROJECT_DIR$/.tmp/" />
     <ignored path="$PROJECT_DIR$/temp/" />
@@ -70,7 +45,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/javaScript/artwork_delete.js">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="152">
+            <state relative-caret-position="285">
               <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
             </state>
           </provider>
@@ -79,7 +54,7 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/php/artwork_delete.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="133">
+            <state relative-caret-position="608">
               <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
             </state>
           </provider>
@@ -88,13 +63,16 @@
       <file pinned="false" current-in-tab="true">
         <entry file="file://$PROJECT_DIR$/homepage.php">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="257">
-              <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+            <state relative-caret-position="131">
+              <caret line="228" column="22" selection-start-line="228" selection-start-column="22" selection-end-line="228" selection-end-column="22" />
               <folding>
+                <element signature="e#0#5#0#PHP" />
                 <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
                 <element signature="n#style#0;n#ul#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+                <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+                <element signature="e#12491#15542#0#HTML" />
               </folding>
             </state>
           </provider>
@@ -103,8 +81,8 @@
       <file pinned="false" current-in-tab="false">
         <entry file="file://$PROJECT_DIR$/display/style.css">
           <provider selected="true" editor-type-id="text-editor">
-            <state relative-caret-position="76">
-              <caret line="4" column="102" selection-start-line="4" selection-start-column="102" selection-end-line="4" selection-end-column="102" />
+            <state relative-caret-position="122">
+              <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
             </state>
           </provider>
         </entry>
@@ -275,7 +253,7 @@
       </list>
     </option>
   </component>
-  <component name="ProjectFrameBounds" extendedState="6">
+  <component name="ProjectFrameBounds" extendedState="7">
     <option name="x" value="394" />
     <option name="y" value="145" />
     <option name="width" value="1890" />
@@ -393,12 +371,12 @@
       <workItem from="1554819668209" duration="453000" />
       <workItem from="1554893904180" duration="322000" />
       <workItem from="1554904413936" duration="595000" />
-      <workItem from="1561131776663" duration="68832000" />
+      <workItem from="1561131776663" duration="69680000" />
     </task>
     <servers />
   </component>
   <component name="TimeTrackingManager">
-    <option name="totallyTimeSpent" value="294655000" />
+    <option name="totallyTimeSpent" value="295503000" />
   </component>
   <component name="ToolWindowManager">
     <frame x="-7" y="-7" width="1295" height="695" extended-state="6" />
@@ -708,13 +686,6 @@
         </state>
       </provider>
     </entry>
-    <entry file="file://$PROJECT_DIR$/javaScript/artwork_delete.js">
-      <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="152">
-          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
-        </state>
-      </provider>
-    </entry>
     <entry file="file://$PROJECT_DIR$/release.php">
       <provider selected="true" editor-type-id="text-editor">
         <state relative-caret-position="1235">
@@ -733,27 +704,37 @@
     </entry>
     <entry file="file://$PROJECT_DIR$/display/style.css">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="76">
-          <caret line="4" column="102" selection-start-line="4" selection-start-column="102" selection-end-line="4" selection-end-column="102" />
+        <state relative-caret-position="122">
+          <caret line="22" column="17" lean-forward="true" selection-start-line="22" selection-start-column="17" selection-end-line="22" selection-end-column="17" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/php/artwork_delete.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="133">
+        <state relative-caret-position="608">
           <caret line="32" column="9" lean-forward="true" selection-start-line="32" selection-start-column="9" selection-end-line="32" selection-end-column="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/javaScript/artwork_delete.js">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="285">
+          <caret line="15" column="18" lean-forward="true" selection-start-line="15" selection-start-column="18" selection-end-line="15" selection-end-column="18" />
         </state>
       </provider>
     </entry>
     <entry file="file://$PROJECT_DIR$/homepage.php">
       <provider selected="true" editor-type-id="text-editor">
-        <state relative-caret-position="257">
-          <caret line="19" column="44" lean-forward="true" selection-start-line="19" selection-start-column="44" selection-end-line="19" selection-end-column="44" />
+        <state relative-caret-position="131">
+          <caret line="228" column="22" selection-start-line="228" selection-start-column="22" selection-end-line="228" selection-end-column="22" />
           <folding>
+            <element signature="e#0#5#0#PHP" />
             <element signature="n#div#0;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#1;n#body#0;n#html#0;n#!!top" />
             <element signature="n#div#2;n#body#0;n#html#0;n#!!top" />
             <element signature="n#style#0;n#ul#0;n#div#0;n#section#0;n#body#0;n#html#0;n#!!top" expanded="true" />
+            <element signature="n#script#0;n#body#0;n#html#0;n#!!top" />
+            <element signature="e#12491#15542#0#HTML" />
           </folding>
         </state>
       </provider>

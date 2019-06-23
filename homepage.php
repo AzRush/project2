@@ -226,13 +226,14 @@ echo $latest_3['title'];
     </div>
 
     <section>
+        <h2>The Heated!</h2>
         <div class="play" id="play">
-            <a href="javascript:" id="next">&gt;&gt;<div class="nextImg"><img width="80" height="54" src="display/2.jpg"></div></a>
-            <a href="javascript:" id="prev">&lt;&lt;<div class="prevImg"><img width="80" height="54" src="display/3.jpg"></div></a>
+            <a href="javascript:" id="next">&gt;&gt;<div class="nextImg"><img width="80" height="54" src=<?php echo "\"img/" . $view_most2['imageFileName'] . "\""; ?>></div></a>
+            <a href="javascript:" id="prev">&lt;&lt;<div class="prevImg"><img width="80" height="54" src=<?php echo "\"img/" . $view_most3['imageFileName'] . "\""; ?>></div></a>
             <ol></ol>
             <ul style="width: 131.25em; left: 0em;">
                 <li>
-                    <img src="display/1.jpg" alt="1">
+                    <img src=<?php echo "\"img/" . $view_most1['imageFileName'] . "\""; ?> alt="1">
                     <div class="description" alt="1">
                         <p1>Az's Work<small>by Az Rush</small></p1>
                         <p>a good job</p>
@@ -242,7 +243,7 @@ echo $latest_3['title'];
                     </div>
                 </li>
                 <li>
-                    <img src="display/2.jpg" alt="2">
+                    <img src=<?php echo "\"img/" . $view_most2['imageFileName'] . "\""; ?> alt="2">
                     <div class="description" alt="2">
                         <p1>Az's Work<small>by Az Rush</small></p1>
                         <p>a good job</p>
@@ -252,7 +253,7 @@ echo $latest_3['title'];
                     </div>
                 </li>
                 <li>
-                    <img src="display/3.jpg" alt="3">
+                    <img src=<?php echo "\"img/" . $view_most3['imageFileName'] . "\""; ?> alt="3">
                     <div class="description" alt="3">
                         <p1>Az's Work<small>by Az Rush</small></p1>
                         <p>a good job</p>
@@ -359,22 +360,23 @@ echo $latest_3['title'];
     </script>
 
     <div id="display">
+        <h2>The Latest!</h2>
         <div id="display1">
-            <img src="display/1.jpg">
+            <img src=<?php echo "\"img\\" . $latest_1['imageFileName'] . "\""; ?>>
             <p>Work1</p>
             <small>by 123</small>
             <small>The painting is awesome</small>
             <a href="details.php">Learn More</a>
         </div>
         <div id="display2">
-            <img src="display/2.jpg">
+            <img src=<?php echo "\"img\\" . $latest_2['imageFileName'] . "\""; ?>>
             <p>Work2</p>
             <small>by 123</small>
             <small>The painting is awesome</small>
             <a href="details.php">Learn More</a>
         </div>
         <div id="display3">
-            <img src="display/3.jpg">
+            <img src=<?php echo "\"img\\" . $latest_3['imageFileName'] . "\""; ?>>
             <p>Work3</p>
             <small>by 123</small>
             <small>The painting is awesome</small>
