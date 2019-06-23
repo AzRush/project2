@@ -260,16 +260,16 @@ else
                 <p>Released</p>
                 <table>
                     <tr>
-                        <td>Title</td><td>Time released</td><td>Update</td><td>Delete</td>
+                        <td>Title</td><td>Time released</td><td>Delete</td>
                     </tr>
                     <?php
-                        $sql = "SELECT * FROM artworks WHERE ownerID='_ownerID' AND orderID IS NOT NULL";
+                        $sql = "SELECT * FROM artworks WHERE ownerID='_ownerID' AND orderID IS NULL";
                         $sql = preg_replace("/_ownerID/",$current_user['userID'],$sql);
                         //echo $sql;
                         $sql_result = mysqli_query($mysql,$sql);
                         while($row = mysqli_fetch_assoc($sql_result))
                         {
-                            $toEcho = "<tr><td>Name</td><td>UploadTime</td><td><a href = #>Update</a></td><td><a href= # >Delete</a></td></tr>";
+                            $toEcho = "<tr><td><a href=#>Name</a></td><td>UploadTime</td><td><a href= # >Delete</a></td></tr>";
                             $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
                             $toEcho = preg_replace("/UploadTime/",$row['timeReleased'],$toEcho);
 
@@ -322,12 +322,41 @@ else
             <div id="sold">
                 <p>Sold</p>
                 <table>
-                    <tr>
-                        <td>No.0701</td><td>Name:Az's Work</td><td>Time:2018.03.12</td><td>Price:10yuan</td>
-                    </tr>
-                    <tr>
-                        <td>No.0721</td><td>Name:Az's Work</td><td>Time:2018.03.13</td><td>Price:11yuan</td>
-                    </tr>
+                                        <tr>
+                                            <td>Title</td><td>Time Sold</td><td>Price</td><td>Purchaser</td>
+                                        </tr>
+                    <?php
+                        $sql = "SELECT * FROM artworks WHERE ownerID='_ownerID' AND orderID IS NOT NULL";
+                        $sql = preg_replace("/_ownerID/",$current_user['userID'],$sql);
+                        //echo $sql;
+                        $sql_result = mysqli_query($mysql,$sql);
+                        while($row = mysqli_fetch_assoc($sql_result))
+                        {
+                            $toEcho = "<tr><td><a href=#>Name</a></td><td>timeSold</td><td><a href = #>Price</a></td><td><a href= # onclick='alert(ownerMessage)'>Purchaser</a></td></tr>";
+                            $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
+                            $toEcho = preg_replace("/Price/",$row['price'],$toEcho);
+                            $sql = "SELECT * FROM orders WHERE orderID=_orderID";
+                            $sql = preg_replace("/_orderID/",$row['orderID'],$sql);
+                            $order_result = mysqli_query($mysql,$sql);
+                            $_order = mysqli_fetch_assoc($order_result);
+                            $toEcho = preg_replace("/timeSold/",$_order['timeCreated'],$toEcho);
+                            $sql = "SELECT * FROM users WHERE userID=_userID";
+                            $sql = preg_replace("/_userID/",$_order['ownerID'],$sql);
+                            $user_result = mysqli_query($mysql,$sql);
+                            $_user = mysqli_fetch_assoc($user_result);
+                            $toEcho = preg_replace("/Purchaser/",$_user['name'],$toEcho);
+                            $owner_message = "\"Name: " . $_user['name'] ."\\ntel: " . $_user['tel'] . "\\nemail: " . $_user['email'] . "\\naddress: " . $_user['address'] ."\"";
+                            $toEcho = preg_replace("/ownerMessage/",$owner_message,$toEcho);
+                            echo $toEcho;
+                        }
+
+
+
+                    ?>
+
+<!--                    <tr>-->
+<!--                        <td>No.0721</td><td>Name:Az's Work</td><td>Time:2018.03.13</td><td>Price:11yuan</td>-->
+<!--                    </tr>-->
                 </table>
             </div>
         </div>

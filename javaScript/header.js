@@ -29,7 +29,7 @@ function footprint_create()
         {
             if(title_split[i] != this_title)
             {
-                footprint += "<a href=" + url_split[i] + ">" + title_split[i] + "</a><span>-></span>>";
+                footprint += "<a href=" + url_split[i] + ">" + title_split[i] + "</a><span>></span>>";
                 title_new += title_split[i] + " ";
                 url_new += url_split[i] + " ";
             }
