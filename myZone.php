@@ -258,7 +258,7 @@ else
     </div>
         <div id="deal">
             <div id="uploaded">
-                <p>Released</p>
+                <p>Released<a href='release.php'>Release New</a></p>
                 <table>
                     <tr>
                         <td>Title</td><td>Time released</td><td>Delete</td>
