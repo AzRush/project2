@@ -26,6 +26,7 @@ else
     <script src="javaScript/cookie_manage.js"></script>
     <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/recharge.js"></script>
+    <script rel="script" type="text/javascript" src="javaScript/artwork_delete.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/register.js"></script>
 </head>
@@ -269,7 +270,7 @@ else
                         $sql_result = mysqli_query($mysql,$sql);
                         while($row = mysqli_fetch_assoc($sql_result))
                         {
-                            $toEcho = "<tr><td><a href=#>Name</a></td><td>UploadTime</td><td><a href= # >Delete</a></td></tr>";
+                            $toEcho = "<tr><td><a href=#>Name</a></td><td>UploadTime</td><td><a href=# onclick= \"artwork_delete(" . $row['artworkID'] .",'" . $row['title'] ."')\">Delete</a></td></tr>";
                             $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
                             $toEcho = preg_replace("/UploadTime/",$row['timeReleased'],$toEcho);
 
