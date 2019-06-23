@@ -2,8 +2,8 @@
 {
     display: block;
     width: 78em;
-    height:30em;
-    margin: 0 auto;
+    height:auto;
+    margin: 0 auto 3em auto;
 }
 
 #personal
@@ -119,12 +119,15 @@
 #uploaded
 {
     background: #f6ff41;
+    padding: 0em 0em 1em 0em;
 }
 #purchased
 {
     background: #ffa99c;
+    padding: 0em 0em 1em 0em;
 }
 #sold
 {
     background: #e79cff;
+    padding: 0em 0em 1em 0em;
 }

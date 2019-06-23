@@ -3,7 +3,7 @@ function recharge()
     let money = prompt('How many dollars do you want to recharge?');
     if(/^\d+$/.test(money) != true)
     {
-        alert("Please input a number!")
+        alert("Please input a integer!")
         return;
     }
     $.ajax({

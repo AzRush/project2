@@ -257,29 +257,70 @@ else
     </div>
         <div id="deal">
             <div id="uploaded">
-                <p>Your Upload</p>
+                <p>Released</p>
                 <table>
                     <tr>
-                        <td>Author:Az</td><td>Name:Az's Work</td><td>Time:2018.03.12</td><td>Price:10yuan</td>
+                        <td>Title</td><td>Time released</td><td>Update</td><td>Delete</td>
                     </tr>
-                    <tr>
-                        <td>Author:Az</td><td>Name:Az's Work</td><td>Time:2018.03.13</td><td>Price:11yuan</td>
-                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM artworks WHERE ownerID='_ownerID' AND orderID IS NOT NULL";
+                        $sql = preg_replace("/_ownerID/",$current_user['userID'],$sql);
+                        //echo $sql;
+                        $sql_result = mysqli_query($mysql,$sql);
+                        while($row = mysqli_fetch_assoc($sql_result))
+                        {
+                            $toEcho = "<tr><td>Name</td><td>UploadTime</td><td><a href = #>Update</a></td><td><a href= # >Delete</a></td></tr>";
+                            $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
+                            $toEcho = preg_replace("/UploadTime/",$row['timeReleased'],$toEcho);
+
+                            echo $toEcho;
+                        }
+                    ?>
+<!--                    <tr>-->
+<!--                        <td>Author:Az</td><td>Name:Az's Work</td><td>Time:2018.03.12</td><td>Price:10yuan</td>-->
+<!--                    </tr>-->
+<!--                    <tr>-->
+<!--                        <td>Author:Az</td><td>Name:Az's Work</td><td>Time:2018.03.13</td><td>Price:11yuan</td>-->
+<!--                    </tr>-->
                 </table>
             </div>
             <div id="purchased">
-                <p>Your Purchase</p>
-                <table>
+                <p>Order</p>
+                <table style="overflow: scroll">
                     <tr>
-                        <td>No.0701</td><td>Name:Az's Work</td><td>Time:2018.03.12</td><td>Price:10yuan</td>
+                        <td>Order ID</td><td>Artwork</td><td>Time Purchased</td><td>Sum</td>
+
                     </tr>
-                    <tr>
-                        <td>No.0721</td><td>Name:Az's Work</td><td>Time:2018.03.13</td><td>Price:11yuan</td>
-                    </tr>
+                    <?php
+                        $sql = "SELECT * FROM orders WHERE ownerID=_ownerID";
+                        $sql = preg_replace("/_ownerID/",$current_user['userID'],$sql);
+                        $sql_result = mysqli_query($mysql,$sql);
+                        while($row = mysqli_fetch_assoc($sql_result))
+                        {
+                            $toEcho = "<tr><td>OrderID</td><td>Artwork</td><td>TimePurchased</td><td>Sum$</td></tr>";
+                            $toEcho = preg_replace("/OrderID/",$row['orderID'],$toEcho);
+                            $toEcho = preg_replace("/TimePurchased/",$row['timeCreated'],$toEcho);
+                            $toEcho = preg_replace("/Sum/",$row['sum'],$toEcho);
+                            $sql = "SELECT * FROM artworks WHERE orderID=_orderID";
+                            $sql = preg_replace("/_orderID/",$row['orderID'],$sql);
+                            $order_result = mysqli_query($mysql,$sql);
+                            $artwork_list = "<ul style='list-style-type:none'>";
+                            $cnt = 0;
+                            while($i = mysqli_fetch_assoc($order_result))
+                            {
+                                $cnt++;
+                                $artwork_list = $artwork_list ."<li>".$cnt . ".<a href=#>" . $i['title'] . "</a></li>";
+                            }
+                            $artwork_list = $artwork_list . "</ul>";
+                            $toEcho = preg_replace("/Artwork/",$artwork_list,$toEcho);
+                            //echo $artwork_list;
+                            echo $toEcho;
+                        }
+                    ?>
                 </table>
             </div>
             <div id="sold">
-                <p>Your Sold</p>
+                <p>Sold</p>
                 <table>
                     <tr>
                         <td>No.0701</td><td>Name:Az's Work</td><td>Time:2018.03.12</td><td>Price:10yuan</td>
