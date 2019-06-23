@@ -124,7 +124,8 @@ login_check = function ()
                      captcha_check();
                  }
              }
-});
+        }
+);
 
     // let login_form = document.getElementById("login_form");
     // login_form.submit();

@@ -71,7 +71,7 @@ nav_create = function ()
     }
     else
     {
-        nav_object.innerHTML ="<div><input type='text' id='search'  placeholder='search...' onkeydown='search_listener();'><button></button></div> <a href='homepage.php'>Home</a> <a href='details.php'>Details</a> <a href='cart.php'>Cart</a> <a href=# onclick='login_show()'>Login</a> <a href=# onclick='register_show()'>Register</a>";
+        nav_object.innerHTML ="<div><input type='text' id='search'  placeholder='search...' onkeydown='search_listener();'><button></button></div> <a href='homepage.php'>Home</a> <a href='details.php'>Details</a> <a href=# onclick='login_show()'>Login</a> <a href=# onclick='register_show()'>Register</a>";
         document.getElementById("header").innerHTML += footprint_create();
         //console.log("wr324");
         return 0;

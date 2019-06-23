@@ -1,13 +1,19 @@
 <?php
 session_start();
+include 'php/database_connect.php';
 if(!isset($_SESSION['user']))
 {
-    echo "<script>alert('Please login first!');window.history.back();</script>";
+    echo "<script>alert('Please login first!');top.location = 'homepage.php';</script>";
+}
+else
+{
+    $current_user_sql = preg_replace("/username/",$_SESSION['user'],'SELECT * FROM users WHERE name="username"');
+    $current_user_query = mysqli_query($mysql, $current_user_sql);
+    $current_user = mysqli_fetch_assoc($current_user_query);
 }
 ?>
-<?php
-include 'php/database_connect.php';
-?>
+
+
 <!DOCTYPE html>
 <html lang="en">
 <head>
@@ -18,6 +24,8 @@ include 'php/database_connect.php';
     <link rel="stylesheet"  type="text/css" href="css/reset.css">
     <script src="javaScript/header.js"></script>
     <script src="javaScript/cookie_manage.js"></script>
+    <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
+    <script rel="script" type="text/javascript" src="javaScript/recharge.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/register.js"></script>
 </head>
@@ -69,42 +77,50 @@ include 'php/database_connect.php';
         </p>
         <p class="inputGroup">
             Address<br>
-            <select name="area">
-                <option value="上海" selected>上海</option>
-                <option value="北京">北京</option>
-                <option value="天津">天津</option>
-                <option value="河北">河北</option>
-                <option value="山西">山西</option>
-                <option value="内蒙古">内蒙古</option>
-                <option value="辽宁">辽宁</option>
-                <option value="吉林">吉林</option>
-                <option value="黑龙江">黑龙江</option>
-                <option value="江苏">江苏</option>
-                <option value="浙江">浙江</option>
-                <option value="江西">江西</option>
-                <option value="安徽">安徽</option>
-                <option value="福建">福建</option>
-                <option value="山东">山东</option>
-                <option value="河南">河南</option>
-                <option value="湖北">湖北</option>
-                <option value="湖南">湖南</option>
-                <option value="广东">广东</option>
-                <option value="广西">广西</option>
-                <option value="海南">海南</option>
-                <option value="重庆">重庆</option>
-                <option value="四川">四川</option>
-                <option value="贵州">贵州</option>
-                <option value="云南">云南</option>
-                <option value="西藏">西藏</option>
-                <option value="陕西">陕西</option>
-                <option value="甘肃">甘肃</option>
-                <option value="青海">青海</option>
-                <option value="宁夏">宁夏</option>
-                <option value="新疆">新疆</option>
-                <option value="香港">香港</option>
-                <option value="澳门">澳门</option>
-                <option value="台湾">台湾</option>
-            </select>
+            <input type="text" name="register_address" id="register_address" onchange="register_address_check()"><span id = "register_address_check">Address Required</span>
+        </p>
+        <!--        <p class="inputGroup">-->
+        <!--            Address<br>-->
+        <!--            <select name="area">-->
+        <!--                <option value="上海" selected>上海</option>-->
+        <!--                <option value="北京">北京</option>-->
+        <!--                <option value="天津">天津</option>-->
+        <!--                <option value="河北">河北</option>-->
+        <!--                <option value="山西">山西</option>-->
+        <!--                <option value="内蒙古">内蒙古</option>-->
+        <!--                <option value="辽宁">辽宁</option>-->
+        <!--                <option value="吉林">吉林</option>-->
+        <!--                <option value="黑龙江">黑龙江</option>-->
+        <!--                <option value="江苏">江苏</option>-->
+        <!--                <option value="浙江">浙江</option>-->
+        <!--                <option value="江西">江西</option>-->
+        <!--                <option value="安徽">安徽</option>-->
+        <!--                <option value="福建">福建</option>-->
+        <!--                <option value="山东">山东</option>-->
+        <!--                <option value="河南">河南</option>-->
+        <!--                <option value="湖北">湖北</option>-->
+        <!--                <option value="湖南">湖南</option>-->
+        <!--                <option value="广东">广东</option>-->
+        <!--                <option value="广西">广西</option>-->
+        <!--                <option value="海南">海南</option>-->
+        <!--                <option value="重庆">重庆</option>-->
+        <!--                <option value="四川">四川</option>-->
+        <!--                <option value="贵州">贵州</option>-->
+        <!--                <option value="云南">云南</option>-->
+        <!--                <option value="西藏">西藏</option>-->
+        <!--                <option value="陕西">陕西</option>-->
+        <!--                <option value="甘肃">甘肃</option>-->
+        <!--                <option value="青海">青海</option>-->
+        <!--                <option value="宁夏">宁夏</option>-->
+        <!--                <option value="新疆">新疆</option>-->
+        <!--                <option value="香港">香港</option>-->
+        <!--                <option value="澳门">澳门</option>-->
+        <!--                <option value="台湾">台湾</option>-->
+        <!--            </select>-->
+        <!--        </p>-->
+        <p class="inputGroup">
+            E-mail<br>
+            <input type="email" name="email" id = "register_email" onchange="register_email_check()"><span id = "register_email_check">E-mail Required</span>
         </p>
         <p class="inputGroup">
             Telephone Number<br>
@@ -204,26 +220,26 @@ include 'php/database_connect.php';
     <div id="container">
     <div id="personal">
         <table>
-            <th colspan="2"><img src="display/1.jpg"></th>
             <tr>
                 <td>Username:</td>
-                <td>AzRush</td>
+                <?php echo "<td>" . $current_user['name'] . "</td>";?>
             </tr>
             <tr class="alt">
                 <td>Tel:</td>
-                <td>110</td>
+                <?php echo "<td>" . $current_user['tel'] . "</td>";?>
             </tr>
             <tr>
                 <td>E-mail:</td>
-                <td>110@126.com</td>
+                <?php echo "<td>" . $current_user['email'] . "</td>";?>
             </tr>
             <tr class="alt">
                 <td>Address:</td>
-                <td>Az's Museum</td>
+                <?php echo "<td>" . $current_user['address'] . "</td>";?>
             </tr>
             <tr class="alt">
                 <td>Balance:</td>
-                <td>100yuan<button onclick="window.alert('Recharge successfully')" style="height:2.4em;color: #ce261e;background-color: #ece748;margin:0;padding:0;">Recharge</button></td>
+                <?php echo "<td><span id='balance'>" . $current_user['balance'] . "</span>$<button onclick='recharge()' style=\"height:2.4em;color: #ce261e;background-color: #ece748;margin:0;padding:0;\">Recharge</button></td>";?>
+
             </tr>
             <!--<tr>-->
                 <!--<td>Genres:</td>-->

@@ -16,14 +16,14 @@ section form
 section form p
 {
 
-    line-height: 1em;
+    line-height: 0.5em;
 
 }
 section form p input
 {
     width:12em;
     height: 2em;
-    margin: 1em 0 1em 0;
+    margin: 0.7em 0 0.7em 0;
     font-size: 0.8em;
     background-color: #ff7e59;
     border-color: #ece748;

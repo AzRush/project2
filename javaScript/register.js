@@ -1,4 +1,4 @@
-var username_valid = 0,password_valid = 0,captcha_valid = 0,telephone_valid=0,password_confirm_valid = 0,agree_valid=0,a1,a2,a3;
+var username_valid = 0,password_valid = 0,captcha_valid = 0,telephone_valid=0,password_confirm_valid = 0,address_valid = 0,email_valid = 0,agree_valid=0,a1,a2,a3;
 var username = [ "AzRush1","AzRush2"];
 var password = ["1234567","123456"];
 var username_now,password_now;
@@ -57,7 +57,13 @@ register_password_check = function ()
             return;
         }
         let patt = /^.*(?=.{6,})(?=.*[A-Za-z0-9!@#$%^&*_?]).*$/;
-        if (patt.test(password1.value))
+        if(/^\d+$/.test(password1.value))
+        {
+            document.getElementById("register_password_check").innerHTML = "Password can't be numeric!";
+            password_valid = 0;
+            return;
+        }
+        else if (patt.test(password1.value))
         {
             document.getElementById("register_password_check").innerHTML = "";
             password_valid = 1;
@@ -96,6 +102,46 @@ register_telephone_check = function()
         }
     }
 }
+register_email_check = function()
+{
+    let email1 = document.getElementById("register_email");
+    let patt;
+    if ((email1 == null) || (email1.value.length == 0))
+    {
+        document.getElementById("register_email_check").innerHTML = "E-mail required";
+        email_valid = 0;
+    }
+    else
+    {
+        patt = /^(\w)+(\.\w+)*@(\w)+((\.\w{2,3}){1,3})$/;;
+        if (patt.test(email1.value))
+        {
+            document.getElementById("register_email_check").innerHTML = "";
+            email_valid = 1;
+
+        }
+        else
+        {
+            document.getElementById("register_email_check").innerHTML = "invalid E-mail address";
+            email_valid = 0;
+        }
+    }
+};
+register_address_check = function()
+{
+    let address1 = document.getElementById("register_address");
+    if ((address1 == null) || (address1.value.length == 0))
+    {
+        document.getElementById("register_address_check").innerHTML = "Address required";
+        address_valid = 0;
+    }
+    else
+    {
+        document.getElementById("register_address_check").innerHTML = "";
+        address_valid = 1;
+
+    }
+};
 
 register_captcha_check = function () {
     let captcha = document.getElementById("register_captcha");
@@ -156,26 +202,54 @@ option_disagree = function()
 }
 register_check = function ()
 {
-    if(!username_valid || !password_valid || !captcha_valid || !password_confirm_valid ||!agree_valid)
+    if(!username_valid || !password_valid || !captcha_valid || !password_confirm_valid ||!agree_valid || !address_valid || !email_valid)
     {
         window.alert("Failed!");
         return;
     }
     let username1 = document.getElementById("register_username");
-    let register_valid = 1;
-    for (let i = 0; i < username.length; i++)
-    {
-        if(username[i] === username1.value)
-        {
-            register_valid = 0;
-            window.alert("Username existed!");
+    let password1 = document.getElementById("register_password");
+    let address1 = document.getElementById("register_address");
+    let email1 = document.getElementById("register_email");
+    let telephone1 = document.getElementById("register_telephone");
+    $.ajax({
+            type: "POST",
+            url: "php/register_check.php",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            data: {method: "register" , username:$(username1).val(), password:$(password1).val(),email: $(email1).val(),address: $(address1).val(), telephone:$(telephone1).val()},
+            dataType: "json",
+
+            error:function(e){
+                if(e.response == "Success")
+                {
+                    alert("Register as " + username1.value);
+                    setCookie("username",username1.value,"1");
+                    nav_create();
+                    register_close();
+                }
+                else
+                {
+                    alert(e.response);
+                    register_problem_set();
+                    document.getElementById("captcha").value = '';
+                    register_captcha_check();
+                }
+            }
         }
-    }
-    if(register_valid == 1)
-    {
-        window.alert("Register as " + username_now);
-        register_close();
-    }
+    );
+    // for (let i = 0; i < username.length; i++)
+    // {
+    //     if(username[i] === username1.value)
+    //     {
+    //         register_valid = 0;
+    //         window.alert("Username existed!");
+    //     }
+    // }
+    // if(register_valid == 1)
+    // {
+    //     window.alert("Register as " + username_now);
+    //     register_close();
+    // }
 }
 register_close = function ()
 {
@@ -183,18 +257,24 @@ register_close = function ()
     let username1 = document.getElementById("register_username");
     let password1 = document.getElementById("register_password");
     let captcha = document.getElementById("register_captcha");
+    let address1 = document.getElementById("register_address");
+    let email1 = document.getElementById("register_email");
     let telephone1 = document.getElementById("register_telephone");
     let confirm_password1 = document.getElementById("register_password_confirm");
+    address1.value = "";
     telephone1.value = "";
     username1.value = "";
     password1.value = "";
     captcha.value = "";
     confirm_password1.value = "";
+    email1.value = "";
     register_telephone_check()
     register_username_check();
     register_password_check();
     register_password_confirm_check();
     register_captcha_check();
+    register_address_check();
+    register_email_check();
     register_window.hidden = true;
 }
 register_show = function ()

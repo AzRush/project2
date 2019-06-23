@@ -263,8 +263,12 @@ footer span
 .inputGroup
 {
     position: relative;
-    margin:0.5em 0 1em 0;
+    margin:0.3em 0 0.3em 0;
     top:1.5em;
+}
+.inputPanel textarea
+{
+    margin: 1em 0 1em 0;
 }
 #register_problem
 {
