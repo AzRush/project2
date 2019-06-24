@@ -31,7 +31,7 @@ section table
 
 section td
 {
-    min-width: 20em;
+    width: 12em;
 
 }
 section img
@@ -46,18 +46,22 @@ section p
     text-align: left;
     font-size: 1em;
 }
-section button {
-    display:inline-block;
-    margin:0 8em 0 0;
-    -webkit-transition-duration: 0.2s; /* Safari */
-    transition-duration: 0.2s;
-    background-color: #ff2d1f;
-    border-collapse: collapse;
-    border-color: transparent;
-    border-radius: 0.4em;
-    color: #f8dce1;
+.removeButton
+{
+    background: #ec6382;
+    position: relative;
+    height: 2em;
+    width:4em;
+    text-decoration: none;
+    padding: 0.05em 1em 0.05em 1em;
+    bottom:-0.1em;
+    cursor: pointer;
+    border-radius: 0.2em
 }
-
+.removeButton:link {color: #ffffff;}    /* unvisited link */
+.removeButton:visited {color: #ffffff;} /* visited link */
+.removeButton:hover {color: #b5ff33;}   /* mouse over link */
+.removeButton:active {color: #b5ff33;}  /* selected link */
 section button:hover {
     background-color: #eeff3d; /* Green */
     color: orangered;

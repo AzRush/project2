@@ -162,6 +162,10 @@ header nav a:active {color: #b5ff33;}  /* selected link */
     cursor: pointer;
     border-radius: 0.2em
 }
+#footprint a:link {color: #ffffff;}    /* unvisited link */
+#footprint a:visited {color: #ffffff;} /* visited link */
+#footprint a:hover {color: #b5ff33;}   /* mouse over link */
+#footprint a:active {color: #b5ff33;}  /* selected link */
 #br{
     display:block;
     position: relative;

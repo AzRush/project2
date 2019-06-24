@@ -13,10 +13,29 @@ else
     $sql = "SELECT * FROM carts WHERE userID=_userID";
     $sql = preg_replace("/_userID/",$current_user['userID'],$sql);
     $sql_result = mysqli_query($mysql,$sql);
-    $the_artworks = mysqli_fetch_assoc($sql_result);
-//    "<table><tr><td rowspan="4"><a href='detail' ><img src="location"></a></td><td><p>title</p></td></tr><tr><td><p>artist</p></td></tr><tr><td><p>price</p></td></tr><tr><td><a onclick='_function()'>Remove</a></td></tr></table>"
+    $the_cart = mysqli_fetch_assoc($sql_result);
+
     $price_sum = 0;
-    
+    $list_innerHTML = "";
+    do{
+        if($the_cart == null)
+        {
+            break;
+        }
+        $sql_artworkID ="SELECT * FROM artworks WHERE artworkID=_artworkID";
+        $sql_artworkID = preg_replace("/_artworkID/",$the_cart['artworkID'],$sql_artworkID);
+        $sql_artworkID_result = mysqli_query($mysql,$sql_artworkID);
+        $the_artwork = mysqli_fetch_assoc($sql_artworkID_result);
+        $the_list = "<table><tr><td rowspan='4'><a href='detail' ><img src='location'></a></td><td><p>Title:</p></td><td><p>_title</p></td><td rowspan='4'><a class='removeButton' onclick='_function'>Remove</a></td></tr><tr></td><td><p>Artist:</p></td><td><p>_artist</p></td></tr><tr></td><td><p>Price:</p></td><td><p>_price</p></td></tr></table>";
+        $the_list = preg_replace("/detail/","details.php?artworkID=".$the_artwork['artworkID'],$the_list);
+        $the_list = preg_replace("/location/","img/".$the_artwork['imageFileName'],$the_list);
+        $the_list = preg_replace("/_title/",$the_artwork['title'],$the_list);
+        $the_list = preg_replace("/_artist/",$the_artwork['artist'],$the_list);
+        $the_list = preg_replace("/_price/",$the_artwork['price'] . "$",$the_list);
+        $the_list = preg_replace("/_function/","cart_remove(" . $the_artwork['artworkID'] .")",$the_list);
+        $price_sum += $the_artwork['price'];
+        $list_innerHTML = $list_innerHTML.$the_list;
+    }while($the_cart = mysqli_fetch_assoc($sql_result));
 }
 ?>
 <!DOCTYPE html>
@@ -223,31 +242,34 @@ else
 </div>
 <section>
     <h1>Your Cart</h1>
-    <table>
-        <tr>
-            <td rowspan="4">
-                <a href="details.php" ><img src="display/2.jpg"></a>
-            </td>
-            <td>
-                <p>Az's Work</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p>Az Rush</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <p class="price">10yuan</p>
-            </td>
-        </tr>
-        <tr>
-            <td>
-                <a onclick="window.alert('Remove successfully!')">Remove</a>
-            </td>
-        </tr>
-    </table>
+    <?php
+    echo $list_innerHTML;
+    ?>
+<!--    <table>-->
+<!--        <tr>-->
+<!--            <td rowspan="4">-->
+<!--                <a href="details.php" ><img src="display/2.jpg"></a>-->
+<!--            </td>-->
+<!--            <td>-->
+<!--                <p>Az's Work</p>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <p>Az Rush</p>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <p class="price">10yuan</p>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--        <tr>-->
+<!--            <td>-->
+<!--                <a onclick="window.alert('Remove successfully!')">Remove</a>-->
+<!--            </td>-->
+<!--        </tr>-->
+<!--    </table>-->
 
 <!--    <ul class="pagination">-->
 <!--        <li><a class="" href="#">«</a></li>-->
