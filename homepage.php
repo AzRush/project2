@@ -18,8 +18,6 @@ $sql_result = mysqli_query($mysql,$sql);
 $latest_1 = mysqli_fetch_assoc($sql_result);
 $latest_2 = mysqli_fetch_assoc($sql_result);
 $latest_3 = mysqli_fetch_assoc($sql_result);
-echo $latest_3['title'];
-
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -235,31 +233,28 @@ echo $latest_3['title'];
                 <li>
                     <img src=<?php echo "\"img/" . $view_most1['imageFileName'] . "\""; ?> alt="1">
                     <div class="description" alt="1">
-                        <p1>Az's Work<small>by Az Rush</small></p1>
-                        <p>a good job</p>
-                        <p>a good job that is very nice</p>
-                        <p>a good job!!!!It's crazy!!!!!</p>
-                        <a href="details.php">Learn More</a>
+                        <h2><?php echo $view_most1['title'];  ?></h2>
+                        <p>by <?php echo $view_most1['artist'];  ?></p>
+                        <div  class="textArea"><p><?php echo $view_most1['description'];  ?></p></div>
+                        <a href=<?php echo "\"details.php?artworkID=" . $view_most1['artworkID'] . "\""; ?>>Learn More</a>
                     </div>
                 </li>
                 <li>
                     <img src=<?php echo "\"img/" . $view_most2['imageFileName'] . "\""; ?> alt="2">
                     <div class="description" alt="2">
-                        <p1>Az's Work<small>by Az Rush</small></p1>
-                        <p>a good job</p>
-                        <p>a good job that is very nice</p>
-                        <p>a good job!!!!It's crazy!!!!!</p>
-                        <a href="details.php">Learn More</a>
+                        <h2><?php echo $view_most2['title'];  ?></h2>
+                        <p>by <?php echo $view_most2['artist'];  ?></p>
+                        <div  class="textArea"><p><?php echo $view_most2['description'];  ?></p></div>
+                        <a href=<?php echo "\"details.php?artworkID=" . $view_most2['artworkID'] . "\""; ?>>Learn More</a>
                     </div>
                 </li>
                 <li>
                     <img src=<?php echo "\"img/" . $view_most3['imageFileName'] . "\""; ?> alt="3">
                     <div class="description" alt="3">
-                        <p1>Az's Work<small>by Az Rush</small></p1>
-                        <p>a good job</p>
-                        <p>a good job that is very nice</p>
-                        <p>a good job!!!!It's crazy!!!!!</p>
-                        <a href="details.php">Learn More</a>
+                        <h2><?php echo $view_most3['title'];  ?></h2>
+                        <p>by <?php echo $view_most3['artist'];  ?></p>
+                        <div  class="textArea"><p><?php echo $view_most3['description'];  ?></p></div>
+                        <a href=<?php echo "\"details.php?artworkID=" . $view_most3['artworkID'] . "\""; ?>>Learn More</a>
                     </div>
                 </li>
             </ul>
@@ -358,29 +353,30 @@ echo $latest_3['title'];
             var timer=setInterval(autoRun, 10000);
         });
     </script>
-
+    <br>
+    <h2>The Latest!</h2>
     <div id="display">
-        <h2>The Latest!</h2>
+
         <div id="display1">
             <img src=<?php echo "\"img\\" . $latest_1['imageFileName'] . "\""; ?>>
-            <p>Work1</p>
-            <small>by 123</small>
-            <small>The painting is awesome</small>
-            <a href="details.php">Learn More</a>
+            <h2><?php echo $latest_1['title'];  ?></h2>
+            <small>by <?php echo $latest_1['artist'];  ?></small>
+            <p><?php echo $latest_1['description'];  ?></p>
+            <a href=<?php echo "\"details.php?artworkID=" . $latest_1['artworkID'] . "\""; ?>>Learn More</a>
         </div>
         <div id="display2">
             <img src=<?php echo "\"img\\" . $latest_2['imageFileName'] . "\""; ?>>
-            <p>Work2</p>
-            <small>by 123</small>
-            <small>The painting is awesome</small>
-            <a href="details.php">Learn More</a>
+            <h2><?php echo $latest_2['title'];  ?></h2>
+            <small>by <?php echo $latest_2['artist'];  ?></small>
+            <p><?php echo $latest_2['description'];  ?></p>
+            <a href=<?php echo "\"details.php?artworkID=" . $latest_2['artworkID'] . "\""; ?>>Learn More</a>
         </div>
         <div id="display3">
             <img src=<?php echo "\"img\\" . $latest_3['imageFileName'] . "\""; ?>>
-            <p>Work3</p>
-            <small>by 123</small>
-            <small>The painting is awesome</small>
-            <a href="details.php">Learn More</a>
+            <h2><?php echo $latest_3['title'];  ?></h2>
+            <small>by <?php echo $latest_3['artist'];  ?></small>
+            <p><?php echo $latest_3['description'];  ?></p>
+            <a href=<?php echo "\"details.php?artworkID=" . $latest_3['artworkID'] . "\""; ?>>Learn More</a>
         </div>
     </div>
     <div id="br"></div>

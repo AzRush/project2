@@ -4,7 +4,7 @@
     display: block;
     margin: 1em auto;
     width: 78em;
-    height: 36em;
+    height: auto;
 }
 #middle1
 {
@@ -33,7 +33,7 @@
     display: inline-block;
     padding: 0;
     /*margin: 0;*/
-    margin-top:2em;
+    /*margin-top:2em;*/
     width: 30em;
     height: 30em;
 }
@@ -44,9 +44,20 @@
     position: relative;
     text-align: left;
     /*top:2em;*/
-    margin-top: 2.5em;
 
     width: 20em;
+}
+#description
+{
+    width: 18em;
+    height: 15em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    line-height: 30px;
+    text-align: left;
+}
+#description::-webkit-scrollbar {
+    display: none;
 }
 #price
 {
@@ -57,10 +68,8 @@
  {
      /*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/
      /*width:30em;*/
-     margin-top: 1em;
      border-collapse:collapse;
      text-align: left;
-
  }
 
 #middle2 table td, table th
@@ -122,7 +131,7 @@
     /*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/
     /*width:30em;*/
     border-collapse:collapse;
-    margin:30% 0;
+    margin:0 0 1em 0;
     text-align: center;
 
 }

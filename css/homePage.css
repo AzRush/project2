@@ -79,6 +79,8 @@ section a:active {color: #cc1bff;}  /* selected link */
     margin-top:1em;
     display: inline-block;
     width: 78em;
+    height: 30em;
+    padding: 0;
     text-align: center;
     overflow: hidden;
 
@@ -91,14 +93,35 @@ section a:active {color: #cc1bff;}  /* selected link */
     /*display: flex;*/
     /*margin: 5%;*/
     display:inline-block;
-    /*width: 20em;*/
+    width: 20em;
     padding-left:1em;
     padding-right:1em;
-    height: auto;
+    height: 40em;
     margin:0;
     /*text-align: center;*/
     /*margin-right:3.2em;*/
     /*margin: 3em 3em 3em 3em;*/
+}
+#display div h2
+{
+    width:13em;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    -icab-text-overflow: ellipsis;
+    -khtml-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
+
+    /*display: -webkit-box;*/
+    /*display: -moz-box;*/
+    /*white-space: pre-wrap;*/
+    /*word-wrap: break-word;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*-webkit-box-orient: vertical;*/
+    /*-webkit-line-clamp:3;*/
 }
 #display #display2
 {
@@ -119,11 +142,26 @@ section a:active {color: #cc1bff;}  /* selected link */
 #display div p
 {
     position:relative;
-    font-size: 1.7em;
+    font-size: 1.2em;
 
     line-height: 1em;
     margin-top:0.4em;
 
+    display: -webkit-box;
+    display: -moz-box;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:4;
+
+}
+#display h2
+{
+    display: block;
+
+    width: auto;
 }
 #display div small
 {
@@ -155,3 +193,34 @@ section a:active {color: #cc1bff;}  /* selected link */
 #display div a:active {color: #ff130a;}  /* selected link */
 
 
+.textArea
+{
+        /*text-align: left;*/
+        /*text-overflow: ellipsis;*/
+        height: 10em;
+        width: 30em;
+
+    /*display: -webkit-box;*/
+    /*display: -moz-box;*/
+    /*white-space: pre-wrap;*/
+    /*word-wrap: break-word;*/
+    /*overflow: hidden;*/
+    /*text-overflow: ellipsis;*/
+    /*-webkit-box-orient: vertical;*/
+    /*-webkit-line-clamp:5;*/
+}
+.textArea p
+{
+    line-height: 1.3em;
+
+    text-align: left;
+    display: -webkit-box;
+    display: -moz-box;
+    white-space: pre-wrap;
+    word-wrap: break-word;
+    overflow: hidden;
+    text-overflow: ellipsis;
+    -webkit-box-orient: vertical;
+    -webkit-line-clamp:8;
+
+}

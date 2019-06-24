@@ -20,14 +20,20 @@ img{border:none;}
     position: relative;
     /*width: 100%;*/
     width: 40%;
-    height: 10em;
+    height: 20em;
     /*height:24%;*/
     line-height: 0.4em;
-    bottom: 10em;
+    bottom: 20em;
     color: rgb(255, 252, 3);
     z-index:10000;
 }
+.description p
+{
+    text-align: center;
+    line-height: 1em;
+    text-overflow:ellipsis;
 
+}
 .description a
 {
     position:relative;

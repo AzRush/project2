@@ -1,5 +1,27 @@
 <?php
 session_start();
+include 'php/database_connect.php';
+if(isset($_GET['artworkID']))
+{
+    $sql = "SELECT * FROM artworks WHERE artworkID=_artworkID";
+    $sql = preg_replace("/_artworkID/",$_GET['artworkID'],$sql);
+    $sql_result = mysqli_query($mysql,$sql);
+    $the_artwork = mysqli_fetch_assoc($sql_result);
+}
+else
+{
+    $sql = "SELECT * FROM artworks WHERE orderID IS NULL";
+    $sql_result = mysqli_query($mysql,$sql);
+    $_time = mt_rand(1,$sql_result->num_rows);
+    for($i = 1; $i <= $_time; $i++)
+    {
+        $the_artwork = mysqli_fetch_assoc($sql_result);
+    }
+}
+$sql = "SELECT * FROM users WHERE userID=_userID";
+$sql = preg_replace("/_userID/",$the_artwork['ownerID'],$sql);
+$sql_result = mysqli_query($mysql,$sql);
+$the_owner = mysqli_fetch_assoc($sql_result);
 ?>
 <?php
 include 'php/database_connect.php';
@@ -197,8 +219,6 @@ include 'php/database_connect.php';
         </p>
     </form>
 </div>
-
-
 <div id="header" >
     <header>
         <a href="homepage.php"><img src="images/logo.png"></a>
@@ -208,51 +228,44 @@ include 'php/database_connect.php';
         </nav>
     </header>
 </div>
+<h2><?php echo $the_artwork['title'];  ?>   <small>by <a href="search.php"> <?php echo $the_artwork['artist'];  ?></a></small></h2>
     <div id="middle">
-        <h1>work1   <small>by <a href="search.php"> AzRush</a></small></h1>
 
         <div id="middle1">
-
-            <img src="display/1.jpg">
+            <img src=<?php echo "\"img/" . $the_artwork['imageFileName'] . "\""; ?>>
         </div>
         <div id="middle2">
-            <p id="price">Price: 100000yuan</p>
-            <p>In 1926, the elder was born……</p>
-            <p>He was born to change the China.</p>
-            <p>Or even the world.</p>
-            <a href="details.php">Purchase Now!</a>
-            <a href="details.php" onclick="cart_add()">Add to Cart</a>
+
             <table>
-                <th colspan="2">product details</th>
+                <th colspan="2">Details</th>
+                <tr>
+                    <td>Artist:</td>
+                    <td><?php echo $the_artwork['artist'];  ?></td>
+                </tr>
+                <tr class="alt">
+                    <td>Genre:</td>
+                    <td><?php echo $the_artwork['genre'];  ?> </td>
+                </tr>
                 <tr>
                     <td>Date:</td>
-                    <td>1926</td>
+                    <td><?php echo $the_artwork['yearOfWork'];  ?> </td>
                 </tr>
                 <tr class="alt">
-                    <td>Medium:</td>
-                    <td>Oil on canvas</td>
+                    <td>Dimension:</td>
+                    <td><?php echo $the_artwork['height'];  ?>  cm * <?php echo $the_artwork['width'];  ?>  cm</td>
                 </tr>
                 <tr>
-                    <td>Dimensions:</td>
-                    <td>100 cm * 100 cm</td>
+                    <td>Owner:</td>
+                    <td><?php echo $the_owner['name'];  ?></td>
                 </tr>
+
                 <tr class="alt">
-                    <td>Home:</td>
-                    <td>Az's Museum</td>
-                </tr>
-                <tr>
-                    <td>Genres:</td>
-                    <td>Cubic</td>
-                </tr>
-                <tr class="alt">
-                    <td>Subjects:</td>
-                    <td>Landscape</td>
-                </tr>
-                <tr>
-                    <td>Heat:</td>
-                    <td>10000</td>
+                    <td>Views:</td>
+                    <td><?php echo $the_artwork['view'];  ?> </td>
                 </tr>
             </table>
+            <p id="description"><?php echo $the_artwork['description'];  ?></p>
+            <a href="details.php" onclick="cart_add()">Add to Cart</a>
         </div>
 
     <aside id="trend">
