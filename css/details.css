@@ -97,6 +97,7 @@
 {
     color:#000000;
     background-color: #ffc424;
+
 }
 #middle2 a
 {
@@ -144,6 +145,7 @@
     border:0.1em solid #ff2d1f;
     padding:0.2em 0.7em 0.2em 0.7em;
     background: #feffa8;
+
 }
 
 #trend table th
@@ -162,7 +164,7 @@
     color:#000000;
     background-color: #ffc424;
 }
-#trend a
+#trend table tr td a p
 {
     /*position:relative;*/
     /*display:block;*/
@@ -177,6 +179,15 @@
     padding: 0em;
     /*border-radius: 1em;*/
     /*//scroll-padding-block-end: 1px;*/
+    width:13em;
+    overflow:hidden;
+    white-space:nowrap;
+    text-overflow:ellipsis;
+    -o-text-overflow:ellipsis;
+    -icab-text-overflow: ellipsis;
+    -khtml-text-overflow: ellipsis;
+    -moz-text-overflow: ellipsis;
+    -webkit-text-overflow: ellipsis;
 }
 #trend a:link {color: #ff0049;}    /* unvisited link */
 #trend a:visited {color: #ff0049;} /* visited link */

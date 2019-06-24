@@ -270,20 +270,53 @@ include 'php/database_connect.php';
 
     <aside id="trend">
         <table>
-            <th>Popular Artists</th>
-            <tr><td><a href="search.php">Artist1</a></td></tr>
-            <tr class="alt"><td><a href="search.php">Artist2</a></td></tr>
-            <tr><td><a href="search.php">Artist3</a></td></tr>
-            <tr class="alt"><td><a href="search.php">Artist4</a></td></tr>
-            <tr><td><a href="search.php">Artist5</a></td></tr>
+            <th>Most Popular</th>
+            <?php
+            $sql = "SELECT * FROM artworks ORDER BY view DESC";
+            $sql_result = mysqli_query($mysql,$sql);
+            $to_echo = "";
+            for($i = 1; $i <= 5; $i++)
+            {
+                if($i % 2 == 0)
+                    $to_echo = $to_echo ."<tr class='alt'>";
+                else
+                    $to_echo = $to_echo ."<tr>";
+                $to_echo = $to_echo ."<td>";
+                $row = mysqli_fetch_assoc($sql_result);
+                $to_echo = $to_echo ."<a href='details.php?artworkID=" . $row['artworkID'] . "'><p>" . $row['title'] . "</p></a></td></tr>";
+            }
+            echo $to_echo;
+            ?>
+<!--            <tr><td><a href="search.php">Artist1</a></td></tr>-->
+<!--            <tr class="alt"><td><a href="search.php">Artist2</a></td></tr>-->
+<!--            <tr><td><a href="search.php">Artist3</a></td></tr>-->
+<!--            <tr class="alt"><td><a href="search.php">Artist4</a></td></tr>-->
+<!--            <tr><td><a href="search.php">Artist5</a></td></tr>-->
         </table>
         <table>
-            <th>Popular Genres</th>
-            <tr><td><a href="search.php">Genre1</a></td></tr>
-            <tr class="alt"><td><a href="search.php">Genre2</a></td></tr>
-            <tr><td><a href="search.php">Genre3</a></td></tr>
-            <tr class="alt"><td><a href="search.php">Genre4</a></td></tr>
-            <tr><td><a href="search.php">Genre5</a></td></tr>
+            <th>Latest</th>
+            <?php
+            $sql = "SELECT * FROM artworks ORDER BY timeReleased ASC";
+            $sql_result = mysqli_query($mysql,$sql);
+            $to_echo = "";
+            for($i = 1; $i <= 5; $i++)
+            {
+                if($i % 2 == 0)
+                    $to_echo = $to_echo ."<tr class='alt'>";
+                else
+                    $to_echo = $to_echo ."<tr>";
+                $to_echo = $to_echo ."<td>";
+                $row = mysqli_fetch_assoc($sql_result);
+                $to_echo = $to_echo ."<a href='details.php?artworkID=" . $row['artworkID'] . "'><p>" . $row['title'] . "</p></a></td></tr>";
+            }
+            echo $to_echo;
+            ?>
+<!--            <th>Latest</th>-->
+<!--            <tr><td><a href="search.php">Genre1</a></td></tr>-->
+<!--            <tr class="alt"><td><a href="search.php">Genre2</a></td></tr>-->
+<!--            <tr><td><a href="search.php">Genre3</a></td></tr>-->
+<!--            <tr class="alt"><td><a href="search.php">Genre4</a></td></tr>-->
+<!--            <tr><td><a href="search.php">Genre5</a></td></tr>-->
         </table>
     </aside>
     </div>
