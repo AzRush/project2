@@ -1,11 +1,22 @@
 <?php
 session_start();
-if(isset($_SESSION['user']))
+include 'php/database_connect.php';
+if(!isset($_SESSION['user']))
 {
-    echo "<script> console.log("."324234234" . ")</script>";
+    echo "<script>alert('Please login first!');top.location = 'homepage.php';</script>";
 }
-else{
-    echo "<script> console.log("."124214234" . ")</script>";
+else
+{
+    $current_user_sql = preg_replace("/username/",$_SESSION['user'],'SELECT * FROM users WHERE name="username"');
+    $current_user_query = mysqli_query($mysql, $current_user_sql);
+    $current_user = mysqli_fetch_assoc($current_user_query);
+    $sql = "SELECT * FROM carts WHERE userID=_userID";
+    $sql = preg_replace("/_userID/",$current_user['userID'],$sql);
+    $sql_result = mysqli_query($mysql,$sql);
+    $the_artworks = mysqli_fetch_assoc($sql_result);
+//    "<table><tr><td rowspan="4"><a href='detail' ><img src="location"></a></td><td><p>title</p></td></tr><tr><td><p>artist</p></td></tr><tr><td><p>price</p></td></tr><tr><td><a onclick='_function()'>Remove</a></td></tr></table>"
+    $price_sum = 0;
+    
 }
 ?>
 <!DOCTYPE html>
@@ -201,7 +212,6 @@ else{
         </p>
     </form>
 </div>
-
 <div id="header" >
     <header>
         <a href="homepage.php"><img src="images/logo.png"></a>
@@ -214,46 +224,17 @@ else{
 <section>
     <h1>Your Cart</h1>
     <table>
-        <tr class="item">
-            <tr>
-                <td rowspan="4">
-                    <a href="details.php"><img src="display/1.jpg"></a>
-                </td>
-                <td style="text-align: left">
-                    <a href="details.php">Az's Work</a>
-                </td>
-            </tr>
-            <tr style="text-align: left">
-                <td>
-                    <a href="search.php">Az Rush</a>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <p class="price">10yuan</p>
-                </td>
-            </tr>
-            <tr>
-                <td>
-                    <button class="pay" onclick="alert('Pay successfully')">Pay Now</button>
-                    <button class="remove" onclick="window.alert('Remove successfully!')">Remove</button>
-                </td>
-            </tr>
-        </tr>
-    </table>
-    <table>
-        <tr class="item">
         <tr>
             <td rowspan="4">
                 <a href="details.php" ><img src="display/2.jpg"></a>
             </td>
-            <td style="text-align: left">
-                <a href="details.php">Az's Work</a>
+            <td>
+                <p>Az's Work</p>
             </td>
         </tr>
-        <tr style="text-align: left">
+        <tr>
             <td>
-                <a href="search.php">Az Rush</a>
+                <p>Az Rush</p>
             </td>
         </tr>
         <tr>
@@ -263,24 +244,22 @@ else{
         </tr>
         <tr>
             <td>
-                <button class="pay" onclick="alert('Pay successfully')">Pay Now</button>
-                <button class="remove" onclick="window.alert('Remove successfully!')">Remove</button>
+                <a onclick="window.alert('Remove successfully!')">Remove</a>
             </td>
         </tr>
-
-        </tr>
     </table>
-    <ul class="pagination">
-        <li><a class="" href="#">«</a></li>
-        <li><a class="active" href="#">1</a></li>
-        <li><a href="#">2</a></li>
-        <li><a href="#">3</a></li>
-        <li><a href="#">4</a></li>
-        <li><a href="#">5</a></li>
-        <li><a href="#">6</a></li>
-        <li><a href="#">7</a></li>
-        <li><a href="#">»</a></li>
-    </ul>
+
+<!--    <ul class="pagination">-->
+<!--        <li><a class="" href="#">«</a></li>-->
+<!--        <li><a class="active" href="#">1</a></li>-->
+<!--        <li><a href="#">2</a></li>-->
+<!--        <li><a href="#">3</a></li>-->
+<!--        <li><a href="#">4</a></li>-->
+<!--        <li><a href="#">5</a></li>-->
+<!--        <li><a href="#">6</a></li>-->
+<!--        <li><a href="#">7</a></li>-->
+<!--        <li><a href="#">»</a></li>-->
+<!--    </ul>-->
     <button id="checkout" onclick="alert('Check out successfully!')" style="margin:0 0 0 55em;">Check out</button>
 </section>
 <div id="br"></div>

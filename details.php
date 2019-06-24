@@ -22,9 +22,9 @@ $sql = "SELECT * FROM users WHERE userID=_userID";
 $sql = preg_replace("/_userID/",$the_artwork['ownerID'],$sql);
 $sql_result = mysqli_query($mysql,$sql);
 $the_owner = mysqli_fetch_assoc($sql_result);
-?>
-<?php
-include 'php/database_connect.php';
+$sql = "UPDATE artworks SET view=".($the_artwork['view']+1)." WHERE artworkID='_artworkID'";
+$sql = preg_replace("/_artworkID/",$the_artwork['artworkID'],$sql);
+$mysql->query($sql);
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -35,6 +35,7 @@ include 'php/database_connect.php';
     <link href="css/global.css" rel="stylesheet" type="text/css">
     <link href="css/reset.css" rel="stylesheet" type="text/css">
     <script src="javaScript/header.js"></script>
+    <script src="javaScript/cart.js"></script>
     <script src="javaScript/cookie_manage.js"></script>
     <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
@@ -265,7 +266,18 @@ include 'php/database_connect.php';
                 </tr>
             </table>
             <p id="description"><?php echo $the_artwork['description'];  ?></p>
-            <a href="details.php" onclick="cart_add()">Add to Cart</a>
+            <?php
+                if(isset($the_artwork['orderID']))
+                {
+                    echo "<a>Sold</a>";
+                }
+                else
+                {
+                    $to_echo =   "<a onclick=\"cart_add(".$the_artwork['artworkID'].")\">Add to Cart</a>";
+                    echo $to_echo;
+                }
+            ?>
+
         </div>
 
     <aside id="trend">

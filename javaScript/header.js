@@ -91,12 +91,3 @@ logout = function()
     setCookie("username","",0);
     nav_create();
 }
-cart_add = function()
-{
-    let ok = 1;
-    if(ok)
-        alert("Item added successfully!");
-    else
-        alert("Item already exist!");
-
-}
