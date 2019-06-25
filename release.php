@@ -10,21 +10,11 @@ else
     $current_user_sql = preg_replace("/username/",$_SESSION['user'],'SELECT * FROM users WHERE name="username"');
     $current_user_query = mysqli_query($mysql, $current_user_sql);
     $current_user = mysqli_fetch_assoc($current_user_query);
-}
-if(isset($_GET['artworkID']))
-{
-    $sql = "SELECT * FROM artworks WHERE artworkID=_artworkID";
-    $sql = preg_replace("/_artworkID/",$_GET['artworkID'],$sql);
-    $sql_result = mysqli_query($mysql,$sql);
-    $the_artwork = mysqli_fetch_assoc($sql_result);
-}
-else
-{
-    $sql = "SELECT * FROM artworks WHERE orderID IS NULL";
-    $sql_result = mysqli_query($mysql,$sql);
-    $_time = mt_rand(1,$sql_result->num_rows);
-    for($i = 1; $i <= $_time; $i++)
+    if(isset($_GET['artworkID']))
     {
+        $sql = "SELECT * FROM artworks WHERE artworkID=_artworkID";
+        $sql = preg_replace("/_artworkID/",$_GET['artworkID'],$sql);
+        $sql_result = mysqli_query($mysql,$sql);
         $the_artwork = mysqli_fetch_assoc($sql_result);
     }
 }
@@ -38,13 +28,15 @@ else
     <link rel="stylesheet"  type="text/css" href="css/reset.css">
     <link rel="stylesheet"  type="text/css" href="css/global.css">
     <link rel="stylesheet"  type="text/css" href="css/release.css">
-    <script src="javaScript/header.js"></script>
-    <script src="javaScript/cookie_manage.js"></script>
     <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
+    <script src="javaScript/header.js"></script>
+    <script src="javaScript/release.js"></script>
+    <script src="javaScript/cookie_manage.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/register.js"></script>
 </head>
 <body onload="nav_create()">
+
 <div id="loginPanel" class="inputPanel" hidden>
     <form action="#" method="post" target="frameFile" >
         <div id="loginTop" class="panelTop">
@@ -233,70 +225,79 @@ else
     </header>
 </div>
 <div id="middle">
-
+    <input type="file" id="file">
     <div id="middle1">
-        <img src=<?php echo "\"img/" . $the_artwork['imageFileName'] . "\""; ?>>
+
+        <?php
+            if(isset($_GET['artworkID']))
+            {
+                echo "<img id = 'image' src=\"img/" . $the_artwork['imageFileName'] ."\">";
+            }
+            else
+            {
+                echo "<img id = 'image'>";
+            }
+        ?>
     </div>
+
     <div id="middle2">
-<!--        <table>-->
-<!--            <th colspan="2">Details</th>-->
-<!--            <tr>-->
-<!--                <td class="alt_name">Artist:</td>-->
-<!--                <td class="alt_value">--><?php //echo $the_artwork['artist'];  ?><!--</td>-->
-<!--            </tr>-->
-<!--            <tr class="alt">-->
-<!--                <td class="alt_name">Genre:</td>-->
-<!--                <td class="alt_value">--><?php //echo $the_artwork['genre'];  ?><!-- </td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td class="alt_name">Date:</td>-->
-<!--                <td class="alt_value">--><?php //echo $the_artwork['yearOfWork'];  ?><!-- </td>-->
-<!--            </tr>-->
-<!--            <tr class="alt">-->
-<!--                <td class="alt_name">Height(cm):</td>-->
-<!--                <td class="alt_value">--><?php //echo $the_artwork['height'];  ?><!--  cm * --><?php //echo $the_artwork['width'];  ?><!--  cm</td>-->
-<!--            </tr>-->
-<!--            <tr>-->
-<!--                <td class="alt_name">Weight(cm):</td>-->
-<!--                <td class="alt_value">--><?php //echo $the_owner['name'];  ?><!--</td>-->
-<!--            </tr>-->
-<!--            <tr class="alt">-->
-<!--                <td class="alt_name">Description:</td>-->
-<!--                <td class="alt_value">--><?php //echo $the_artwork['description'];  ?><!-- </td>-->
-<!--            </tr>-->
-<!--        </table>-->
         <table>
             <th colspan="2">Details</th>
             <tr>
+                <td class="alt_name">Title:</td>
+                <td class="alt_value" ><input class="alt_submit" type="text" id="title"></td>
+            </tr>
+            <tr>
                 <td class="alt_name">Artist:</td>
-                <td class="alt_value"><input class="alt_submit" type="text"></td>
+                <td class="alt_value" ><input class="alt_submit" type="text" id="artist"></td>
             </tr>
             <tr class="alt">
                 <td class="alt_name">Genre:</td>
-                <td class="alt_value"><input class="alt_submit" type="text"></td>
+                <td class="alt_value" ><input class="alt_submit" type="text" id="genre"></td>
             </tr>
             <tr>
                 <td class="alt_name">Year of Work:</td>
-                <td class="alt_value"><input class="alt_submit" type="number"></td>
+                <td class="alt_value" ><input class="alt_submit" type="number" id="yearOfWork"></td>
             </tr>
             <tr class="alt">
                 <td class="alt_name">Height(cm):</td>
-                <td class="alt_value"><input class="alt_submit" type="number"></td>
+                <td class="alt_value" ><input class="alt_submit" type="number" id="height"></td>
             </tr>
             <tr>
-                <td class="alt_name">Weight(cm):</td>
-                <td class="alt_value"><input class="alt_submit" type="number"</td>
+                <td class="alt_name">Width(cm):</td>
+                <td class="alt_value" ><input class="alt_submit" type="number" id="width"</td>
+            </tr>
+            <tr>
+                <td class="alt_name">Price($USD):</td>
+                <td class="alt_value" ><input class="alt_submit" type="number" id="price"</td>
             </tr>
             <tr class="alt">
                 <td class="alt_name">Description:</td>
-                <td class="alt_value"><textarea type="text"></textarea></td>
+                <td class="alt_value"><textarea id='description' type="text"></textarea></td>
             </tr>
         </table>
         <?php
-
-            $to_echo ="<a onclick=\"cart_add(".$the_artwork['artworkID'].")\">Release</a>";
+        if(isset($_GET['artworkID']))
+        {
+            $to_echo = "<script>fulfil('_title','_artist','_genre',_yearOfWork,_height,_width,'_description',_price)</script>";
+            $to_echo = preg_replace("/_title/",$the_artwork['title'],$to_echo);
+            $to_echo = preg_replace("/_genre/",$the_artwork['genre'],$to_echo);
+            $to_echo = preg_replace("/_artist/",$the_artwork['artist'],$to_echo);
+            $to_echo = preg_replace("/_yearOfWork/",$the_artwork['yearOfWork'],$to_echo);
+            $to_echo = preg_replace("/_height/",$the_artwork['height'],$to_echo);
+            $to_echo = preg_replace("/_width/",$the_artwork['width'],$to_echo);
+            $the_description = $the_artwork['description'];
+            $the_description=preg_replace("/\'/","\\\'",$the_description);
+            $the_description=preg_replace('/\"/',"\\\"",$the_description);
+            $the_description=str_replace("\r\n","\\r\\n",$the_description);
+            $the_description=str_replace("<em>","",$the_description);
+            $the_description=str_replace("</em>","",$the_description);
+            $to_echo = preg_replace("/_description/",$the_description,$to_echo);
+            $to_echo = preg_replace("/_price/",$the_artwork['price'],$to_echo);
             echo $to_echo;
+        }
         ?>
+        <a onclick="release()">Release</a>;
     </div>
 </div>
 <div id="br"></div>

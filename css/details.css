@@ -63,11 +63,6 @@ h2
 #description::-webkit-scrollbar {
     display: none;
 }
-#price
-{
-    font-size: 2em;
-    margin-bottom: 0.6em;
-}
 #middle2 table
  {
      /*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/

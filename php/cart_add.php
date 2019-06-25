@@ -2,7 +2,7 @@
 session_start();
 if(!isset($_SESSION['user']))
 {
-    echo "User";
+    echo "Please login first!";
     return;
 }
 include 'database_connect.php';

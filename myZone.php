@@ -270,7 +270,7 @@ else
                         $sql_result = mysqli_query($mysql,$sql);
                         while($row = mysqli_fetch_assoc($sql_result))
                         {
-                            $toEcho = "<tr><td><a href=#>Name</a></td><td>UploadTime</td><td><a href=# onclick= \"artwork_delete(" . $row['artworkID'] .",'" . $row['title'] ."')\">Delete</a></td></tr>";
+                            $toEcho = "<tr><td><a href='release.php?artworkID=".$row["artworkID"]."'>Name</a></td><td>UploadTime</td><td><a href=# onclick= \"artwork_delete(" . $row['artworkID'] .",'" . $row['title'] ."')\">Delete</a></td></tr>";
                             $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
                             $toEcho = preg_replace("/UploadTime/",$row['timeReleased'],$toEcho);
 

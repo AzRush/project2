@@ -125,7 +125,7 @@ login_check = function ()
                  }
              }
         }
-);
+    );
 
     // let login_form = document.getElementById("login_form");
     // login_form.submit();
