@@ -66,6 +66,12 @@ function cart_remove(artwork_id,artwork_title)
                             dataType: "json",
                             success:function(datas)
                             {
+                                if(datas == 0)
+                                {
+                                    document.getElementById("price_sum").remove();
+                                    document.getElementById("checkout").remove();
+                                    return;
+                                }
                                 // alert("Delete '" + artwork_title + "' successfully!");
                                 // document.getElementById("uploaded").innerHTML = "<p>Released<a href='release.php'>Release New</a></p> <table> <tr> <td>Title</td><td>Time released</td><td>Delete</td></tr></table>";
                                 document.getElementById("price_sum").innerHTML ="Sum: " + datas + "$";
@@ -99,8 +105,8 @@ function checkOut() {
                 if(e.response == 'Success')
                 {
                     alert("Checkout successfully!");
-                    document.getElementById("price_sum").innerHTML = "0$";
-                    document.getElementById("the_cart").innerHTML ="<h1>Your Cart</h1>";
+                    // document.getElementById("price_sum").innerHTML = "0$";
+                    // document.getElementById("the_cart").innerHTML ="<h1>Your Cart</h1>";
                 }
                 else
 

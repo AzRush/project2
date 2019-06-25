@@ -1,8 +1,4 @@
 
-h2
-{
-    margin-top: 0.5em;
-}
 #middle
 {
     display: block;
@@ -14,7 +10,7 @@ h2
 {
 
     display: inline-block;
-    float: left;
+
     text-align: left;
     margin-left: 1em;
     width: 30em;
@@ -44,8 +40,9 @@ h2
 
 #middle2
 {
+    margin:auto 1em;
     display: inline-block;
-    position: relative;
+    float: left;
     text-align: left;
     /*top:2em;*/
 
@@ -69,26 +66,42 @@ h2
     margin-bottom: 0.6em;
 }
 #middle2 table
- {
-     /*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/
-     /*width:30em;*/
-     border-collapse:collapse;
-     text-align: left;
- }
-
-#middle2 table td, table th
 {
-    min-width: 7em;
+    /*font-family:"Trebuchet MS", Arial, Helvetica, sans-serif;*/
+    /*width:30em;*/
+    border-collapse:collapse;
+    text-align: left;
+}
+
+#middle2 table th
+{
+    width: 20em;
     font-size:1em;
     height:1.5em;
     border:0.1em solid #ff2d1f;
     padding:0.2em 0.7em 0.2em 0.7em;
     background: #feffa8;
 }
-
+.alt_name
+{
+    width: 10em;
+    font-size:1em;
+    height:1.5em;
+    border:0.1em solid #ff2d1f;
+    padding:0.2em 0.7em 0.2em 0.7em;
+    background: #feffa8;
+}
+.alt_value
+{
+    width: 20em;
+    font-size:1em;
+    height:1.5em;
+    border:0.1em solid #ff2d1f;
+    padding:0.2em 0.7em 0.2em 0.7em;
+    background: #feffa8;
+}
 #middle2 table th
 {
-    min-width: 14em;
     font-size:1.1em;
     text-align:center;
     padding-top:0.3em;
@@ -99,6 +112,7 @@ h2
 
 #middle2 table tr.alt td
 {
+    width: 10em;
     color:#000000;
     background-color: #ffc424;
 
@@ -197,3 +211,16 @@ h2
 #trend a:visited {color: #ff0049;} /* visited link */
 #trend a:hover {color: #cc1bff;}   /* mouse over link */
 #trend a:active {color: #cc1bff;}  /* selected link */
+.alt_submit{
+    outline-style: none ;
+    border: 0.1em solid #ccc;
+    border-radius: 0.1em;
+    padding: 0.5em 0.5em;
+    width: 20em;
+}
+.alt_submit:focus{
+    border-color: #66afe9;
+    outline: 0;
+    -webkit-box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6);
+    box-shadow: inset 0 1px 1px rgba(0,0,0,.075),0 0 8px rgba(102,175,233,.6)
+}

@@ -229,7 +229,7 @@ $mysql->query($sql);
         </nav>
     </header>
 </div>
-<h2><?php echo $the_artwork['title'];  ?>   <small>by <a href="search.php"> <?php echo $the_artwork['artist'];  ?></a></small></h2>
+<h2><?php echo $the_artwork['title'];  ?></h2>
     <div id="middle">
 
         <div id="middle1">
@@ -256,11 +256,15 @@ $mysql->query($sql);
                     <td><?php echo $the_artwork['height'];  ?>  cm * <?php echo $the_artwork['width'];  ?>  cm</td>
                 </tr>
                 <tr>
+                    <td>Price:</td>
+                    <td><?php echo $the_artwork['price'];  ?>$</td>
+                </tr>
+                <tr class="alt">
                     <td>Owner:</td>
                     <td><?php echo $the_owner['name'];  ?></td>
                 </tr>
 
-                <tr class="alt">
+                <tr>
                     <td>Views:</td>
                     <td><?php echo $the_artwork['view'];  ?> </td>
                 </tr>

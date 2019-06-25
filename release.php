@@ -11,6 +11,23 @@ else
     $current_user_query = mysqli_query($mysql, $current_user_sql);
     $current_user = mysqli_fetch_assoc($current_user_query);
 }
+if(isset($_GET['artworkID']))
+{
+    $sql = "SELECT * FROM artworks WHERE artworkID=_artworkID";
+    $sql = preg_replace("/_artworkID/",$_GET['artworkID'],$sql);
+    $sql_result = mysqli_query($mysql,$sql);
+    $the_artwork = mysqli_fetch_assoc($sql_result);
+}
+else
+{
+    $sql = "SELECT * FROM artworks WHERE orderID IS NULL";
+    $sql_result = mysqli_query($mysql,$sql);
+    $_time = mt_rand(1,$sql_result->num_rows);
+    for($i = 1; $i <= $_time; $i++)
+    {
+        $the_artwork = mysqli_fetch_assoc($sql_result);
+    }
+}
 ?>
 <!DOCTYPE html>
 <html lang="en">
@@ -20,7 +37,7 @@ else
     <link href="display/style.css" rel="stylesheet" type="text/css">
     <link rel="stylesheet"  type="text/css" href="css/reset.css">
     <link rel="stylesheet"  type="text/css" href="css/global.css">
-    <link rel="stylesheet"  type="text/css" href="css/homePage.css">
+    <link rel="stylesheet"  type="text/css" href="css/release.css">
     <script src="javaScript/header.js"></script>
     <script src="javaScript/cookie_manage.js"></script>
     <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
@@ -215,34 +232,74 @@ else
         </nav>
     </header>
 </div>
+<div id="middle">
 
-<section>
-    <form action="#" method="post" target="frameFile" >
-        <div id="loginTop" class="panelTop">
-            <p>Login</p><button onclick="login_close()">×</button>
-        </div>
-        <div class="inputGroup">
-            Username<br>
-            <input type="text" name="username" id="username" onchange="username_check()" pattern="([0-9]|[a-z]|[A-Z]|&#95){1,}"><span id = "username_check">Username Required</span>
-        </div>
-        <div class="inputGroup">
-            Password<br>
-            <input type="password" name="password" id="password" onchange="password_check()"><span id = "password_check">Password Required</span>
-        </div>
+    <div id="middle1">
+        <img src=<?php echo "\"img/" . $the_artwork['imageFileName'] . "\""; ?>>
+    </div>
+    <div id="middle2">
+<!--        <table>-->
+<!--            <th colspan="2">Details</th>-->
+<!--            <tr>-->
+<!--                <td class="alt_name">Artist:</td>-->
+<!--                <td class="alt_value">--><?php //echo $the_artwork['artist'];  ?><!--</td>-->
+<!--            </tr>-->
+<!--            <tr class="alt">-->
+<!--                <td class="alt_name">Genre:</td>-->
+<!--                <td class="alt_value">--><?php //echo $the_artwork['genre'];  ?><!-- </td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td class="alt_name">Date:</td>-->
+<!--                <td class="alt_value">--><?php //echo $the_artwork['yearOfWork'];  ?><!-- </td>-->
+<!--            </tr>-->
+<!--            <tr class="alt">-->
+<!--                <td class="alt_name">Height(cm):</td>-->
+<!--                <td class="alt_value">--><?php //echo $the_artwork['height'];  ?><!--  cm * --><?php //echo $the_artwork['width'];  ?><!--  cm</td>-->
+<!--            </tr>-->
+<!--            <tr>-->
+<!--                <td class="alt_name">Weight(cm):</td>-->
+<!--                <td class="alt_value">--><?php //echo $the_owner['name'];  ?><!--</td>-->
+<!--            </tr>-->
+<!--            <tr class="alt">-->
+<!--                <td class="alt_name">Description:</td>-->
+<!--                <td class="alt_value">--><?php //echo $the_artwork['description'];  ?><!-- </td>-->
+<!--            </tr>-->
+<!--        </table>-->
+        <table>
+            <th colspan="2">Details</th>
+            <tr>
+                <td class="alt_name">Artist:</td>
+                <td class="alt_value"><input class="alt_submit" type="text"></td>
+            </tr>
+            <tr class="alt">
+                <td class="alt_name">Genre:</td>
+                <td class="alt_value"><input class="alt_submit" type="text"></td>
+            </tr>
+            <tr>
+                <td class="alt_name">Year of Work:</td>
+                <td class="alt_value"><input class="alt_submit" type="number"></td>
+            </tr>
+            <tr class="alt">
+                <td class="alt_name">Height(cm):</td>
+                <td class="alt_value"><input class="alt_submit" type="number"></td>
+            </tr>
+            <tr>
+                <td class="alt_name">Weight(cm):</td>
+                <td class="alt_value"><input class="alt_submit" type="number"</td>
+            </tr>
+            <tr class="alt">
+                <td class="alt_name">Description:</td>
+                <td class="alt_value"><textarea type="text"></textarea></td>
+            </tr>
+        </table>
+        <?php
 
-        <div class="inputGroup">
-            <span id="problem">1 + 3 = ?</span> <input type="button" value="Refresh" onclick="problem_set()">
-            <br>
-            <input type="text" name="captcha" id = "captcha" onchange="captcha_check()"><span id = "captcha_check">Answer required</span>
-        </div>
-        <div class="inputGroup">
-            <input type="submit" value="Login" name="login" onclick="login_check()" onsubmit="null">
-        </div>
-    </form>
-</section>
-
+            $to_echo ="<a onclick=\"cart_add(".$the_artwork['artworkID'].")\">Release</a>";
+            echo $to_echo;
+        ?>
+    </div>
+</div>
 <div id="br"></div>
 <footer><span>Copyright © 2019 Az Rush. All rights reserved.</span></footer>
-
 </body>
 </html>
