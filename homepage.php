@@ -1,12 +1,5 @@
 <?php
 session_start();
-if(isset($_SESSION['user']))
-{
-    echo "<script> console.log("."234234234" . ")</script>";
-}
-else{
-    echo "<script> console.log("."124214234" . ")</script>";
-}
 include 'php/database_connect.php';
 $sql = "SELECT * FROM artworks ORDER BY view DESC";
 $sql_result = mysqli_query($mysql,$sql);

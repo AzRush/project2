@@ -38,3 +38,45 @@ cart_add = function(ID)
         }
     );
 }
+function cart_remove(artwork_id,artwork_title)
+{
+    if (confirm("Are you sure to remove " + artwork_title + "?")==true)
+    {
+        $.ajax({
+                type: "POST",
+                url: "php/cart_remove.php",
+                contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                data: {artwork_id:artwork_id},
+                dataType: "json",
+                success:function(datas)
+                {
+                    // alert("Delete '" + artwork_title + "' successfully!");
+                    // document.getElementById("uploaded").innerHTML = "<p>Released<a href='release.php'>Release New</a></p> <table> <tr> <td>Title</td><td>Time released</td><td>Delete</td></tr></table>";
+
+                },
+                error:function(e)
+                {
+                    alert(e.response);
+                    document.getElementById(artwork_id).remove();
+                    $.ajax({
+                            type: "POST",
+                            url: "php/cart_sum.php",
+                            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+                            data: {method:"get_sum"},
+                            dataType: "json",
+                            success:function(datas)
+                            {
+                                // alert("Delete '" + artwork_title + "' successfully!");
+                                // document.getElementById("uploaded").innerHTML = "<p>Released<a href='release.php'>Release New</a></p> <table> <tr> <td>Title</td><td>Time released</td><td>Delete</td></tr></table>";
+                                document.getElementById("price_sum").innerHTML ="Sum: " + datas + "$";
+                            },
+                        }
+                    );
+                    //alert("Delete '" + artwork_title + "' successfully!");
+                    //inner_html = e.response;
+                    //document.getElementById("uploaded").innerHTML = "<p>Released<a href='release.php'>Release New</a></p> <table> <tr> <td>Title</td><td>Time released</td><td>Delete</td></tr>" + inner_html + "</table>";
+                }
+            }
+        );
+    }
+}

@@ -26,13 +26,13 @@ else
         $sql_artworkID = preg_replace("/_artworkID/",$the_cart['artworkID'],$sql_artworkID);
         $sql_artworkID_result = mysqli_query($mysql,$sql_artworkID);
         $the_artwork = mysqli_fetch_assoc($sql_artworkID_result);
-        $the_list = "<table><tr><td rowspan='4'><a href='detail' ><img src='location'></a></td><td><p>Title:</p></td><td><p>_title</p></td><td rowspan='4'><a class='removeButton' onclick='_function'>Remove</a></td></tr><tr></td><td><p>Artist:</p></td><td><p>_artist</p></td></tr><tr></td><td><p>Price:</p></td><td><p>_price</p></td></tr></table>";
+        $the_list = "<table id = '".$the_artwork['artworkID']."'><tr><td rowspan='4'><a href='detail' ><img src='location'></a></td><td><p>Title:</p></td><td><p>_title</p></td><td rowspan='4'><a class='removeButton' onclick=\"_function\">Remove</a></td></tr><tr></td><td><p>Artist:</p></td><td><p>_artist</p></td></tr><tr></td><td><p>Price:</p></td><td><p>_price</p></td></tr></table>";
         $the_list = preg_replace("/detail/","details.php?artworkID=".$the_artwork['artworkID'],$the_list);
         $the_list = preg_replace("/location/","img/".$the_artwork['imageFileName'],$the_list);
         $the_list = preg_replace("/_title/",$the_artwork['title'],$the_list);
         $the_list = preg_replace("/_artist/",$the_artwork['artist'],$the_list);
         $the_list = preg_replace("/_price/",$the_artwork['price'] . "$",$the_list);
-        $the_list = preg_replace("/_function/","cart_remove(" . $the_artwork['artworkID'] .")",$the_list);
+        $the_list = preg_replace("/_function/","cart_remove(" . $the_artwork['artworkID'] .",'".$the_artwork['title']."')",$the_list);
         $price_sum += $the_artwork['price'];
         $list_innerHTML = $list_innerHTML.$the_list;
     }while($the_cart = mysqli_fetch_assoc($sql_result));
@@ -48,6 +48,7 @@ else
     <link rel="stylesheet"  type="text/css" href="css/reset.css">
     <script src="javaScript/header.js"></script>
     <script src="javaScript/cookie_manage.js"></script>
+    <script src="javaScript/cart.js"></script>
     <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/register.js"></script>
@@ -282,7 +283,7 @@ else
 <!--        <li><a href="#">7</a></li>-->
 <!--        <li><a href="#">»</a></li>-->
 <!--    </ul>-->
-    <button id="checkout" onclick="alert('Check out successfully!')" style="margin:0 0 0 55em;">Check out</button>
+    <a id='price_sum' class="removeButton"><?php echo "Sum:".$price_sum . "$"?></a><a class="removeButton" id="checkout" onclick="alert('Check out successfully!')">Check out</a>
 </section>
 <div id="br"></div>
 
