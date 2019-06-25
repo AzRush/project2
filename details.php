@@ -273,11 +273,10 @@ $mysql->query($sql);
                 }
                 else
                 {
-                    $to_echo =   "<a onclick=\"cart_add(".$the_artwork['artworkID'].";?>)\">Add to Cart</a>";
+                    $to_echo ="<a onclick=\"cart_add(".$the_artwork['artworkID'].")\">Add to Cart</a>";
                     echo $to_echo;
                 }
             ?>
-
         </div>
 
     <aside id="trend">

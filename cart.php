@@ -241,7 +241,7 @@ else
         </nav>
     </header>
 </div>
-<section>
+<section id="the_cart">
     <h1>Your Cart</h1>
     <?php
     echo $list_innerHTML;
@@ -283,7 +283,14 @@ else
 <!--        <li><a href="#">7</a></li>-->
 <!--        <li><a href="#">»</a></li>-->
 <!--    </ul>-->
-    <a id='price_sum' class="removeButton"><?php echo "Sum:".$price_sum . "$"?></a><a class="removeButton" id="checkout" onclick="alert('Check out successfully!')">Check out</a>
+    <?php
+        if($price_sum != 0)
+        {
+            echo "<a id='price_sum' class='removeButton'>"."Sum:".$price_sum . "$" ."</a><a class='removeButton' id='checkout' onclick='checkOut()'>Check out</a>";
+        }
+
+    ?>
+
 </section>
 <div id="br"></div>
 

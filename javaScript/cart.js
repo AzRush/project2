@@ -80,3 +80,35 @@ function cart_remove(artwork_id,artwork_title)
         );
     }
 }
+function checkOut() {
+    $.ajax({
+            type: "POST",
+            url: "php/cart_checkOut.php",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            data: {method:"cart_checkOut"},
+            dataType: "json",
+            success:function(datas)
+            {
+                // alert("Delete '" + artwork_title + "' successfully!");
+                // document.getElementById("uploaded").innerHTML = "<p>Released<a href='release.php'>Release New</a></p> <table> <tr> <td>Title</td><td>Time released</td><td>Delete</td></tr></table>";
+                // document.getElementById("price_sum").innerHTML ="Sum: " + datas + "$";
+                alert(datas);
+            },
+            error:function (e)
+            {
+                if(e.response == 'Success')
+                {
+                    alert("Checkout successfully!");
+                    document.getElementById("price_sum").innerHTML = "0$";
+                    document.getElementById("the_cart").innerHTML ="<h1>Your Cart</h1>";
+                }
+                else
+
+                {
+                    alert(e.response);
+                }
+
+            }
+        }
+    );
+}
