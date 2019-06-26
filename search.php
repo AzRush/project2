@@ -1,4 +1,5 @@
 <?php
+session_start();
 include 'php/database_connect.php';
 ?>
 <!DOCTYPE html>
@@ -11,6 +12,7 @@ include 'php/database_connect.php';
     <link rel="stylesheet"  type="text/css" href="css/reset.css">
     <script src="javaScript/header.js"></script>
     <script src="javaScript/cookie_manage.js"></script>
+    <script src="javaScript/search.js"></script>
     <script type="text/javascript" src="display/jquery-1.4.2.min.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/login.js"></script>
     <script rel="script" type="text/javascript" src="javaScript/register.js"></script>
@@ -194,7 +196,6 @@ include 'php/database_connect.php';
         </p>
     </form>
 </div>
-
 <div id="header" >
     <header>
         <a href="homepage.php"><img src="images/logo.png"></a>
@@ -204,157 +205,165 @@ include 'php/database_connect.php';
         </nav>
     </header>
 </div>
-    <section>
-        <h1>Search Result:AzRush</h1>
-        <div id="sort">
-            <span>Sorted by</span>
-            <input id="price" value="price" name="sort" type="radio" checked>
-            <label for="price">Price</label>
-            <input id="name" value="name" name="sort" type="radio">
-            <label for="name">Name</label>
-        </div>
-        <div id="display">
-            <div>
-                <img src="display/1.jpg">
-                <p>Work1</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/2.jpg">
-                <p>Work2</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>            <div>
-            <img src="display/3.jpg">
-            <p>Work3</p>
-            <small>by 123</small>
-            <small>The painting is awesome</small>
-            <a href="details.php">Learn More</a>
-        </div>            <div>
-            <img src="display/3.jpg">
-            <p>Work3</p>
-            <small>by 123</small>
-            <small>The painting is awesome</small>
-            <a href="details.php">Learn More</a>
-        </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
-            <div>
-                <img src="display/3.jpg">
-                <p>Work3</p>
-                <small>by 123</small>
-                <small>The painting is awesome</small>
-                <a href="details.php">Learn More</a>
-            </div>
+<section>
+        <?php
+            if(isset($_GET["key"]) and $_GET["key"]!="")
+            {
+                echo "<h1>Search Result:" . $_GET["key"]  . "</h1>";
+                echo '<div id="sort"><span>Sorted by</span><input id="heat" name="search_key" type="radio" value="view" checked><label for="heat">Heat</label><input id="timeReleased" name="search_key" type="radio" value="timeReleased"><label for="timeReleased">Time released</label><input id="order_dec" name="search_order" type="radio"  value="DESC" checked hidden><label id="label_dec" for="order_dec">↓</label><input id="order_inc" name="search_order" type="radio" value="ASC" hidden><label id="label_inc" for="order_inc">↑</label></div>';
+                echo "<script>getPagination(1,'".$_GET["key"]  ."')</script>";
+            }
+            else
+            {
+                echo "<h2>Why not search for something interesting?</h2>";
+            }
+        ?>
 
-
-  
-        </div>
-        <ul class="pagination">
-            <li><a class="" href="#">«</a></li>
-            <li><a class="active" href="#">1</a></li>
-            <li><a href="#">2</a></li>
-            <li><a href="#">3</a></li>
-            <li><a href="#">4</a></li>
-            <li><a href="#">5</a></li>
-            <li><a href="#">6</a></li>
-            <li><a href="#">7</a></li>
-            <li><a href="#">»</a></li>
-        </ul>
-    </section>
-</div>
+<!--        <div id="sort">-->
+<!--            <span>Sorted by</span>-->
+<!--            <input id="heat" name="sort" type="radio" checked>-->
+<!--            <label for="heat">Heat</label>-->
+<!--            <input id="timeReleased" name="sort" type="radio">-->
+<!--            <label for="timeReleased">Time released</label>-->
+<!--            <input id="order_dec" name="search_order" type="radio" checked hidden>-->
+<!--            <label id="label_dec" for="order_dec">↓</label>-->
+<!--            <input id="order_inc" name="search_order" type="radio" hidden>-->
+<!--            <label id="label_inc" for="order_inc">↑</label>-->
+<!--        </div>-->
+<!--        <div id="display">-->
+<!--            <div>-->
+<!--                <img src="display/1.jpg">-->
+<!--                <p>Work1</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/2.jpg">-->
+<!--                <p>Work2</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>            <div>-->
+<!--            <img src="display/3.jpg">-->
+<!--            <p>Work3</p>-->
+<!--            <small>by 123</small>-->
+<!--            <small>The painting is awesome</small>-->
+<!--            <a href="details.php">Learn More</a>-->
+<!--        </div>            <div>-->
+<!--            <img src="display/3.jpg">-->
+<!--            <p>Work3</p>-->
+<!--            <small>by 123</small>-->
+<!--            <small>The painting is awesome</small>-->
+<!--            <a href="details.php">Learn More</a>-->
+<!--        </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!--            <div>-->
+<!--                <img src="display/3.jpg">-->
+<!--                <p>Work3</p>-->
+<!--                <small>by 123</small>-->
+<!--                <small>The painting is awesome</small>-->
+<!--                <a href="details.php">Learn More</a>-->
+<!--            </div>-->
+<!---->
+<!---->
+<!--  -->
+<!--        </div>-->
+<!--        <ul class="pagination">-->
+<!--            <li><a class="" href="#">«</a></li>-->
+<!--            <li><a class="active" href="#">1</a></li>-->
+<!--            <li><a href="#">2</a></li>-->
+<!--            <li><a href="#">3</a></li>-->
+<!--            <li><a href="#">4</a></li>-->
+<!--            <li><a href="#">5</a></li>-->
+<!--            <li><a href="#">6</a></li>-->
+<!--            <li><a href="#">7</a></li>-->
+<!--            <li><a href="#">»</a></li>-->
+<!--        </ul>-->
+</section>
 <div id="br"></div>
 <footer><span>Copyright © 2019 Az Rush. All rights reserved.</span></footer>
 </body>

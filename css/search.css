@@ -5,6 +5,7 @@ section
     display: block;
     width: 70em;
     height: auto;
+    min-height:30em;
     margin: 2em auto 2em auto ;
     padding-bottom: 2em;
     background-color: #fff2c1;
@@ -15,6 +16,14 @@ section h1
     text-align: left;
     margin-left: 3em;
     padding-top: 1em;
+}
+section h2
+{
+    margin:auto;
+    font-size: 3em;
+    line-height: 2em;
+    padding-top:2.2em;
+
 }
 #sort
 {
@@ -87,9 +96,16 @@ section h1
     border-radius: 0.5em;
     /*//scroll-padding-block-end: 1px;*/
 }
-
-
 #display div a:link {color: #000000;}    /* unvisited link */
 #display div a:visited {color: #000000;} /* visited link */
 #display div a:hover {color: #ff130a;}   /* mouse over link */
 #display div a:active {color: #ff130a;}  /* selected link */
+#label_dec,#label_inc
+{
+
+    margin: 0;
+    font-size: 2em;
+    font-weight: bold;
+    position:relative;
+    bottom: -0.2em;
+}

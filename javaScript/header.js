@@ -8,7 +8,7 @@ search_listener = function()
         let temp = event.keyCode;
             if(temp == 13)
             {
-                window.location.href = "search.php?=" + document.getElementById("search").value;
+                window.location.href = "search.php?key=" + document.getElementById("search").value;
             }
 };
 function footprint_create()
