@@ -8,7 +8,8 @@ $sql = "SELECT * FROM carts WHERE userID=_userID";
 $sql = preg_replace("/_userID/",$current_user['userID'],$sql);
 $sql_result = mysqli_query($mysql,$sql);
 $the_cart = mysqli_fetch_assoc($sql_result);
-
+$error_message = "";
+$noError = 1;
 do{
     if($the_cart == null)
     {
@@ -18,44 +19,29 @@ do{
     $sql_artworkID = preg_replace("/_artworkID/",$the_cart['artworkID'],$sql_artworkID);
     $sql_artworkID_result = mysqli_query($mysql,$sql_artworkID);
     $the_artwork = mysqli_fetch_assoc($sql_artworkID_result);
-
+    if($the_artwork['orderID']!= null)
+    {
+        $error_message = $error_message .$the_artwork['title']."has been bought!"."\n";
+        $noError = 0;
+        continue;
+    }
+    if($the_cart['changed'] == 1)
+    {
+        $cur_sql = "UPDATE carts SET changed=0 WHERE cartID=".$the_cart["cartID"];
+        $mysql->query($cur_sql);
+        $error_message = $error_message .$the_artwork['title']."has been updated!"."\n";
+        $noError = 0;
+        continue;
+    }
 }while($the_cart = mysqli_fetch_assoc($sql_result));
-if($price_sum > $current_user['balance'])
+if($noError)
 {
-    echo "Your balance is " . $current_user['balance'] ."$,please recharge first!";
+
+    echo "Success";
     return;
 }
 else
 {
-    $sql ="INSERT INTO orders (ownerID,sum) VALUES (_ownerID,_sum)";
-    $sql = preg_replace("/_ownerID/",$current_user['userID'],$sql);
-    $sql = preg_replace("/_sum/",$price_sum,$sql);
-    $result = mysqli_query($mysql,$sql);
-    $sql="SELECT LAST_INSERT_ID()";
-    $sql_result=mysqli_query($mysql,$sql);
-
-    $the_orderID = mysqli_fetch_row($sql_result)[0];
-    //echo $the_orderID;
-    $sql = "SELECT * FROM carts WHERE userID=_userID";
-    $sql = preg_replace("/_userID/",$current_user['userID'],$sql);
-    $sql_result = mysqli_query($mysql,$sql);
-    $the_cart = mysqli_fetch_assoc($sql_result);
-    
-    do{
-        if($the_cart == null)
-        {
-            break;
-        }
-        $sql_artworkID ="UPDATE artworks SET orderID=_orderID WHERE artworkID=_artworkID";
-        $sql_artworkID = preg_replace("/_artworkID/",$the_cart['artworkID'],$sql_artworkID);
-        $sql_artworkID = preg_replace("/_orderID/",$the_orderID,$sql_artworkID);
-        $sql_artworkID_result = mysqli_query($mysql,$sql_artworkID);
-
-
-
-    }while($the_cart = mysqli_fetch_assoc($sql_result));
-
-    echo "Success";
+    echo $error_message;
 }
-
 ?>

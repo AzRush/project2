@@ -8,7 +8,7 @@ search_listener = function()
         let temp = event.keyCode;
             if(temp == 13)
             {
-                window.location.href = "search.php";
+                window.location.href = "search.php?=" + document.getElementById("search").value;
             }
 };
 function footprint_create()
@@ -20,6 +20,14 @@ function footprint_create()
     var footprint_url = getCookie("footprint_url");
     let title_found = 0;
 
+    if(footprint_title == "")
+    {
+        setCookie("footprint_title",this_title,"7");
+        setCookie("footprint_url",this_url,"7");
+        return (footprint + "<a href=" + this_url + ">" + this_title + "</a></div>");
+    }
+
+
     {
         var title_split = footprint_title.split(" ");
         var url_split = footprint_url.split(" ");
@@ -29,7 +37,7 @@ function footprint_create()
         {
             if(title_split[i] != this_title)
             {
-                footprint += "<a href=" + url_split[i] + ">" + title_split[i] + "</a><span>></span>>";
+                footprint += "<a href=" + url_split[i] + ">" + title_split[i] + "</a><span>=></span>";
                 title_new += title_split[i] + " ";
                 url_new += url_split[i] + " ";
             }
@@ -89,5 +97,5 @@ logout = function()
         }
         });
     setCookie("username","",0);
-    nav_create();
+    location.reload();
 }

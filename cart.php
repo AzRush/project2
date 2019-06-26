@@ -14,7 +14,6 @@ else
     $sql = preg_replace("/_userID/",$current_user['userID'],$sql);
     $sql_result = mysqli_query($mysql,$sql);
     $the_cart = mysqli_fetch_assoc($sql_result);
-
     $price_sum = 0;
     $list_innerHTML = "";
     do{

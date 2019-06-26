@@ -10,10 +10,12 @@
     $file = dirname($file);
     $file = $file . "\\img\\" . $artwork_to_delete['imageFileName'];
     unlink($file);
+    $sql = "DELETE FROM carts WHERE artworkID=_artworkID";
+    $sql = preg_replace("/_artworkID/",$_POST['artwork_id'],$sql);
+    $mysql->query($sql);
     $sql = "DELETE FROM artworks WHERE artworkID=_artworkID";
     $sql = preg_replace("/_artworkID/",$_POST['artwork_id'],$sql);
     $mysql->query($sql);
-
     $sql_user = "SELECT * FROM users WHERE name='_name'";
     $sql_user = preg_replace("/_name/",$_SESSION['user'],$sql_user);
     $user_result = mysqli_query($mysql,$sql_user);

@@ -87,6 +87,7 @@ function cart_remove(artwork_id,artwork_title)
     }
 }
 function checkOut() {
+
     $.ajax({
             type: "POST",
             url: "php/cart_check.php",
@@ -95,14 +96,27 @@ function checkOut() {
             dataType: "json",
             success:function(datas)
             {
-                alert(datas);
+
             },
             error:function (e)
             {
-                alert(e.response);
+                if(e.response=="Success")
+                {
+                    let msg ='Do you want to check out?';if (confirm(msg)!=true)return;
+                    checkOut_final();
+                }
+                else
+                {
+                    alert(e.response);
+                    return;
+                }
+
             }
         }
     );
+
+}
+function checkOut_final() {
     $.ajax({
             type: "POST",
             url: "php/cart_checkOut.php",
