@@ -218,7 +218,35 @@ include 'php/database_connect.php';
                 echo "<h2>Why not search for something interesting?</h2>";
             }
         ?>
-
+        <script>
+            let $_GET = (function(){
+                var url = window.document.location.href.toString();
+                var u = url.split("?");
+                if(typeof(u[1]) == "string"){
+                    u = u[1].split("&");
+                    var get = {};
+                    for(var i in u){
+                        var j = u[i].split("=");
+                        get[j[0]] = j[1];
+                    }
+                    return get;
+                } else {
+                    return {};
+                }
+            })();
+            $("#heat").bind("click",function () {
+                getPagination(1,$_GET['key']);
+            })
+            $("#timeReleased").bind("click",function () {
+                getPagination(1,$_GET['key']);
+            })
+            $("#order_inc").bind("click",function () {
+                getPagination(1,$_GET['key']);
+            })
+            $("#order_dec").bind("click",function () {
+                getPagination(1,$_GET['key']);
+            })
+        </script>
 <!--        <div id="sort">-->
 <!--            <span>Sorted by</span>-->
 <!--            <input id="heat" name="sort" type="radio" checked>-->
@@ -230,6 +258,8 @@ include 'php/database_connect.php';
 <!--            <input id="order_inc" name="search_order" type="radio" hidden>-->
 <!--            <label id="label_inc" for="order_inc">↑</label>-->
 <!--        </div>-->
+    <div id="display"></div>
+    <ul id = "pagination" class="pagination"></ul>
 <!--        <div id="display">-->
 <!--            <div>-->
 <!--                <img src="display/1.jpg">-->
@@ -348,10 +378,8 @@ include 'php/database_connect.php';
 <!--                <small>The painting is awesome</small>-->
 <!--                <a href="details.php">Learn More</a>-->
 <!--            </div>-->
-<!---->
-<!---->
-<!--  -->
 <!--        </div>-->
+
 <!--        <ul class="pagination">-->
 <!--            <li><a class="" href="#">«</a></li>-->
 <!--            <li><a class="active" href="#">1</a></li>-->

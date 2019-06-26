@@ -77,10 +77,7 @@ section h2
     position: relative;
     display: block;
     font-size: 1em;
-
-    line-height: 0.6em;
     margin-top:0.7em;
-    /*margin-bottom: 1em;*/
 }
 #display div a
 {
@@ -109,3 +106,50 @@ section h2
     position:relative;
     bottom: -0.2em;
 }
+
+#title
+{
+    /*position:relative;*/
+    /*display:block;*/
+    margin:0 auto;
+    text-decoration: none;
+    font-weight: bold;
+    line-height:3em;
+    padding: 0.3em 0;
+    width:8em;
+    min-hight:3em;
+    overflow:scroll;
+    white-space:nowrap;
+
+}
+#title::-webkit-scrollbar {
+    display: none;
+}
+#description
+{
+    margin:0 auto;
+    padding:0;
+    width: 15em;
+    height: 6em;
+    overflow-x: hidden;
+    overflow-y: scroll;
+    line-height:1.05em;
+    text-align: left;
+}
+#description::-webkit-scrollbar {
+    display: none;
+}
+#artist
+{
+    /*position:relative;*/
+    /*display:block;*/
+    margin:0 auto;
+    text-decoration: none;
+    width:8em;
+    overflow:scroll;
+    white-space:nowrap;
+
+}
+#artist::-webkit-scrollbar {
+     display: none;
+ }

@@ -30,11 +30,13 @@ for($i = 1; $i <= ($_GET['pagination'] - 1) * 12; $i++)
     $the_artwork = mysqli_fetch_assoc($sql_result);
 }
 $the_display = "";
-
-for($i = 1; $i <= min(12,$total_pagination - ($_GET['pagination'] - 1) * 12); $i++)
+$the_max = 12;
+if(12 > $total_item - ($_GET['pagination'] - 1) * 12)
+    $the_max = $total_item - ($_GET['pagination'] - 1) * 12;
+for($i = 1; $i <= $the_max; $i++)
 {
     $the_artwork = mysqli_fetch_assoc($sql_result);
-    $str = '<div><img src="img/_imageFileName"><p>_title</p><small>by _artist</small><small id = "description">_description</small><a href="details.php?artworkID=_artworkID">Learn More</a></div>';
+    $str = '<div><img src="img/_imageFileName"><p id ="title">_title</p><small id="artist">by _artist</small><small id = "description">_description</small><a href="details.php?artworkID=_artworkID">Learn More</a></div>';
     $str = preg_replace("/_imageFileName/",$the_artwork["imageFileName"],$str);
     $str = preg_replace("/_title/",$the_artwork["title"],$str);
     $str = preg_replace("/_artist/",$the_artwork["artist"],$str);
@@ -42,17 +44,6 @@ for($i = 1; $i <= min(12,$total_pagination - ($_GET['pagination'] - 1) * 12); $i
     $str = preg_replace("/_artworkID/",$the_artwork["artworkID"],$str);
     $the_display = $the_display . $str;
 }
-//<ul class="pagination">
-//        <li><a class="" href="#">«</a></li>
-//        <li><a class="active" href="#">1</a></li>
-//
-//        <li><a href="#">3</a></li>
-//        <li><a href="#">4</a></li>
-//        <li><a href="#">5</a></li>
-//        <li><a href="#">6</a></li>
-//        <li><a href="#">7</a></li>
-//        <li><a href="#">»</a></li>
-//    </ul>
 $pagination = "";
 for($i = 1;$i <= $total_pagination; $i++)
 {
