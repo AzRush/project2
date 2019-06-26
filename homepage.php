@@ -1,12 +1,12 @@
 <?php
 session_start();
 include 'php/database_connect.php';
-$sql = "SELECT * FROM artworks ORDER BY view DESC";
+$sql = "SELECT * FROM artworks WHERE orderID IS NULL ORDER BY view DESC";
 $sql_result = mysqli_query($mysql,$sql);
 $view_most1 = mysqli_fetch_assoc($sql_result);
 $view_most2 = mysqli_fetch_assoc($sql_result);
 $view_most3 = mysqli_fetch_assoc($sql_result);
-$sql = "SELECT * FROM artworks ORDER BY timeReleased ASC";
+$sql = "SELECT * FROM artworks WHERE orderID IS NULL ORDER BY timeReleased DESC";
 $sql_result = mysqli_query($mysql,$sql);
 $latest_1 = mysqli_fetch_assoc($sql_result);
 $latest_2 = mysqli_fetch_assoc($sql_result);

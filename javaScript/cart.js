@@ -89,6 +89,22 @@ function cart_remove(artwork_id,artwork_title)
 function checkOut() {
     $.ajax({
             type: "POST",
+            url: "php/cart_check.php",
+            contentType: 'application/x-www-form-urlencoded;charset=utf-8',
+            data: {method:"cart_check"},
+            dataType: "json",
+            success:function(datas)
+            {
+                alert(datas);
+            },
+            error:function (e)
+            {
+                alert(e.response);
+            }
+        }
+    );
+    $.ajax({
+            type: "POST",
             url: "php/cart_checkOut.php",
             contentType: 'application/x-www-form-urlencoded;charset=utf-8',
             data: {method:"cart_checkOut"},

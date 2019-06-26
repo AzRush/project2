@@ -1,4 +1,4 @@
-function release() {
+function release(_artworkID) {
     let title = document.getElementById("title");
     let artist = document.getElementById("artist");
     let genre = document.getElementById("genre");
@@ -8,7 +8,8 @@ function release() {
     let price = document.getElementById("price");
     let description = document.getElementById("description");
     let file = document.getElementById("file");
-    let image;
+    let image = document.getElementById("image");
+    let image_dataURL;
     let the_error = "";
     let no_error = 1;
     if (title.value == "" || title.value === null) {
@@ -67,25 +68,25 @@ function release() {
         the_error += "Description required!\n"
         no_error = 0;
     }
-    if (file.files[0] == null) {
+    if (image.src == null || image.src == "") {
         the_error += "Image required!\n"
-        no_error = 0;
-    }
-    else if(!/image(.*)/.test(file.files[0].type))
-    {
-        the_error += "Please choose an image file!"
         no_error = 0;
     }
     else
     {
-        let file_reader = new FileReader();
-        file_reader.readAsDataURL(file.files[0]);
-        file_reader.onload = function ()
+        let the_image = new Image();
+        the_image.src = document.getElementById('image').src;
+        the_image.onload = function ()
         {
-            image = this.result;
+            let canvas = document.createElement("canvas");
+            canvas.width = the_image.width;
+            canvas.height = the_image.height;
+            canvas.getContext("2d").drawImage(the_image,0,0);
+            let dataURL = canvas.toDataURL();
+            document.getElementById("image").src = dataURL;
         }
+        image_dataURL = document.getElementById("image").src;
     }
-
     if (!no_error)
     {
         alert(the_error);
@@ -93,6 +94,7 @@ function release() {
     }
     let the_JSON =
             {
+                artworkID:_artworkID,
                 title:title.value,
                 artist:artist.value,
                 genre:genre.value,
@@ -101,7 +103,7 @@ function release() {
                 width:width.value,
                 price:price.value,
                 description:description.value,
-                image:image
+                image:image_dataURL
             };
     $.ajax({
             type: "POST",
@@ -109,23 +111,26 @@ function release() {
             contentType: 'application/x-www-form-urlencoded;charset=utf-8',
             data: the_JSON,
             dataType: "json",
+            success:function(data)
+            {
+                alert( "234234234" + data );
+            },
             error:function(e)
             {
-                if(e.response == "Success")
-                {
-                    alert(e.response);
-
-                }
-                else
-                {
-                    alert(e.response);
-
-                }
+                // if(e.response == "Success")
+                // {
+                //     alert(e.response + "123123");
+                //
+                // }
+                // else
+                // {
+                //    // eval(e.response);
+                //    //  alert(e.response);
+                // }
+                eval(e.response);
             }
         }
     );
-
-
 }
 $(document).ready(function(){
     $("#image").bind("click",function()
@@ -164,4 +169,19 @@ function fulfil(title,artist,genre,yearOfWork,height,width,description,price)
     document.getElementById("width").value = width;
     document.getElementById("price").value = price;
     document.getElementById("description").value = description;
+}
+
+function imageInitialize()
+{
+    let the_image = new Image();
+    the_image.src = document.getElementById('image').src;
+    the_image.onload = function ()
+    {
+        let canvas = document.createElement("canvas");
+        canvas.width = the_image.width;
+        canvas.height = the_image.height;
+        canvas.getContext("2d").drawImage(the_image,0,0);
+        let dataURL = canvas.toDataURL("image/jpg");
+        document.getElementById("image").src = dataURL;
+    }
 }

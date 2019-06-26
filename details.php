@@ -287,7 +287,7 @@ $mysql->query($sql);
         <table>
             <th>Most Popular</th>
             <?php
-            $sql = "SELECT * FROM artworks ORDER BY view DESC";
+            $sql = "SELECT * FROM artworks WHERE orderID IS NULL ORDER BY view DESC";
             $sql_result = mysqli_query($mysql,$sql);
             $to_echo = "";
             for($i = 1; $i <= 5; $i++)
@@ -311,7 +311,7 @@ $mysql->query($sql);
         <table>
             <th>Latest</th>
             <?php
-            $sql = "SELECT * FROM artworks ORDER BY timeReleased ASC";
+            $sql = "SELECT * FROM artworks WHERE orderID IS NULL ORDER BY timeReleased DESC";
             $sql_result = mysqli_query($mysql,$sql);
             $to_echo = "";
             for($i = 1; $i <= 5; $i++)

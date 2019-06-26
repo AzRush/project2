@@ -12,8 +12,6 @@ else
     $current_user = mysqli_fetch_assoc($current_user_query);
 }
 ?>
-
-
 <!DOCTYPE html>
 <html lang="en">
 <head>

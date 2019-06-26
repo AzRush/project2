@@ -16,6 +16,12 @@ else
         $sql = preg_replace("/_artworkID/",$_GET['artworkID'],$sql);
         $sql_result = mysqli_query($mysql,$sql);
         $the_artwork = mysqli_fetch_assoc($sql_result);
+        if($the_artwork['ownerID']!=$current_user['userID'])
+        {
+            $to_echo = "<script>alert('Reject!');window.history.go(-1);</script>";
+            echo $to_echo;
+            return;
+        }
     }
 }
 ?>
@@ -225,13 +231,14 @@ else
     </header>
 </div>
 <div id="middle">
-    <input type="file" id="file">
+    <input accept="image/gif,image/jpeg,image/jpg,image/png" type="file" id="file">
     <div id="middle1">
 
         <?php
             if(isset($_GET['artworkID']))
             {
                 echo "<img id = 'image' src=\"img/" . $the_artwork['imageFileName'] ."\">";
+                echo "<script>imageInitialize();</script>";
             }
             else
             {
@@ -297,7 +304,17 @@ else
             echo $to_echo;
         }
         ?>
-        <a onclick="release()">Release</a>;
+        <?php
+        if(isset($_GET['artworkID']))
+        {
+            echo "<a onclick='release(".$the_artwork['artworkID'].")'>Release</a>";
+        }
+        else
+        {
+            echo "<a onclick='release()'>Release</a>";
+        }
+        ?>
+
     </div>
 </div>
 <div id="br"></div>
