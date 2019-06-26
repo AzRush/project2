@@ -308,7 +308,7 @@ else
                             while($i = mysqli_fetch_assoc($order_result))
                             {
                                 $cnt++;
-                                $artwork_list = $artwork_list ."<li>".$cnt . ".<a href=#>" . $i['title'] . "</a></li>";
+                                $artwork_list = $artwork_list ."<li>".$cnt . ".<a href='details.php?artworkID=".$i['artworkID']."'>" . $i['title'] . "</a></li>";
                             }
                             $artwork_list = $artwork_list . "</ul>";
                             $toEcho = preg_replace("/Artwork/",$artwork_list,$toEcho);

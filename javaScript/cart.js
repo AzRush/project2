@@ -129,12 +129,14 @@ function checkOut_final() {
                 // document.getElementById("uploaded").innerHTML = "<p>Released<a href='release.php'>Release New</a></p> <table> <tr> <td>Title</td><td>Time released</td><td>Delete</td></tr></table>";
                 // document.getElementById("price_sum").innerHTML ="Sum: " + datas + "$";
                 alert(datas);
+                location.reload();
             },
             error:function (e)
             {
                 if(e.response == 'Success')
                 {
                     alert("Checkout successfully!");
+                    location.reload();
                     // document.getElementById("price_sum").innerHTML = "0$";
                     // document.getElementById("the_cart").innerHTML ="<h1>Your Cart</h1>";
                 }
@@ -142,6 +144,7 @@ function checkOut_final() {
 
                 {
                     alert(e.response);
+                    location.reload();
                 }
 
             }

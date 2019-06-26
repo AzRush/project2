@@ -35,7 +35,7 @@ if(!isset($_POST['artworkID']))
     file_put_contents("..\\img\\".$the_artworkID . ".jpg",$decodedData);
     $to_echo = "alert('Release _title successfully!');location.replace('release.php?artworkID=_artworkID');";
     $to_echo = preg_replace("/_title/",$_POST['title'],$to_echo);
-    $to_echo = preg_replace("/_artworkID/",$_POST['artworkID'],$to_echo);
+    $to_echo = preg_replace("/_artworkID/",$the_artworkID,$to_echo);
     echo $to_echo;
     //echo "Release " . $the_artworkID . " successfully!";
 }

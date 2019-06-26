@@ -127,7 +127,8 @@ function release(_artworkID) {
                 //    // eval(e.response);
                 //    //  alert(e.response);
                 // }
-                eval(e.response);
+                // alert(e.response);
+                 eval(e.response);
             }
         }
     );
