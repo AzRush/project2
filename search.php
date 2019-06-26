@@ -210,7 +210,8 @@ include 'php/database_connect.php';
             if(isset($_GET["key"]) and $_GET["key"]!="")
             {
                 echo "<h1>Search Result:" . $_GET["key"]  . "</h1>";
-                echo '<div id="sort"><span>Sorted by</span><input id="heat" name="search_key" type="radio" value="view" checked><label for="heat">Heat</label><input id="timeReleased" name="search_key" type="radio" value="timeReleased"><label for="timeReleased">Time released</label><input id="order_dec" name="search_order" type="radio"  value="DESC" checked hidden><label id="label_dec" for="order_dec">↓</label><input id="order_inc" name="search_order" type="radio" value="ASC" hidden><label id="label_inc" for="order_inc">↑</label></div>';
+                echo '<div id ="range"><span>Search range</span> <input id="range_title" name="range_title" type="checkbox" value = "title" checked><label for="range_title">Title</label><input id="range_artist" name="range_artist" type="checkbox" value = "artist" checked><label for="range_artist">Artist</label><input id="range_description" name="range_description" type="checkbox" value = "description" checked><label for="range_description">Description</label></div>';
+                echo '<div id="sort"><span>Sorted by</span> <input id="heat" name="search_key" type="radio" value="view" checked><label for="heat">Heat</label><input id="timeReleased" name="search_key" type="radio" value="timeReleased"><label for="timeReleased">Time released</label><input id="order_dec" name="search_order" type="radio"  value="DESC" checked hidden><label id="label_dec" for="order_dec">↓</label><input id="order_inc" name="search_order" type="radio" value="ASC" hidden><label id="label_inc" for="order_inc">↑</label></div>';
                 echo "<script>getPagination(1,'".$_GET["key"]  ."')</script>";
             }
             else
@@ -236,7 +237,6 @@ include 'php/database_connect.php';
             })();
             the_key = unescape($_GET['key']);
             $("#heat").bind("click",function () {
-                alert(the_key );
                 getPagination(1,the_key);
 
             })
@@ -247,6 +247,15 @@ include 'php/database_connect.php';
                 getPagination(1,the_key);
             })
             $("#order_dec").bind("click",function () {
+                getPagination(1,the_key);
+            })
+            $("#range_title").bind("click",function () {
+                getPagination(1,the_key);
+            })
+            $("#range_artist").bind("click",function () {
+                getPagination(1,the_key);
+            })
+            $("#range_description").bind("click",function () {
                 getPagination(1,the_key);
             })
         </script>

@@ -28,7 +28,7 @@ cart_add = function(ID)
                     alert("You can't by your own artwork!");
                     return;
                 }
-                else if(e.response == "User")
+                if(e.response == "User")
                 {
                     alert("Please login first!");
                     return;

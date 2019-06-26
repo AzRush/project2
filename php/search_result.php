@@ -7,10 +7,41 @@ if(isset($_SESSION['user']))
     $current_user_query = mysqli_query($mysql, $current_user_sql);
     $current_user = mysqli_fetch_assoc($current_user_query);
 }
-$searchAddSql = "WHERE ((orderID IS NULL) AND (title LIKE '%".$_GET['key']."%' OR description LIKE '%".$_GET['key']."%' OR artist LIKE '%".$_GET['key']."%' OR genre LIKE '%".$_GET['key']."%'))";
-$sql = "SELECT * FROM artworks " .$searchAddSql." ORDER BY ".$_GET['search_key'] ." " . $_GET['search_order'];
+$search_range = "";
+$need_OR = 0;
+if(isset($_GET['search_title']))
+{
+    $search_range = $search_range . "title LIKE '%" . $_GET['key'] . "%'";
+    $need_OR = 1;
+}
+if(isset($_GET['search_artist']))
+{
+    if($need_OR == 0)
+        $search_range = $search_range . "artist LIKE '%" . $_GET['key'] . "%'";
+    else
+        $search_range = $search_range . " OR artist LIKE '%" . $_GET['key'] . "%'";
+    $need_OR = 1;
+}
+if(isset($_GET['search_description']))
+{
+    if($need_OR == 0)
+        $search_range = $search_range . "description LIKE '%" . $_GET['key'] . "%'";
+    else
+        $search_range = $search_range . " OR description LIKE '%" . $_GET['key'] . "%'";
+    $need_OR = 1;
+}
 
+if($search_range == "")
+{
+    echo "fail";
+    return;
+}
+//$searchAddSql = "WHERE ((orderID IS NULL) AND (title LIKE '%".$_GET['key']."%' OR description LIKE '%".$_GET['key']."%' OR artist LIKE '%".$_GET['key']."%' OR genre LIKE '%".$_GET['key']."%'))";
+$searchAddSql = "WHERE ((orderID IS NULL) AND (_search_range))";
+$searchAddSql = preg_replace("/_search_range/",$search_range,$searchAddSql);
+$sql = "SELECT * FROM artworks " .$searchAddSql." ORDER BY ".$_GET['search_key'] ." " . $_GET['search_order'];
 $sql_result = mysqli_query($mysql,$sql);
+
 if($sql_result == null)
 {
     echo "fail";

@@ -30,6 +30,11 @@ section h2
     text-align: right;
     margin-right:5em;
 }
+#range
+{
+    text-align: right;
+    margin-right:5em;
+}
 #display
 {
     /*background: #ff130a;*/
