@@ -42,13 +42,29 @@ for($i = 1; $i <= min(12,$total_pagination - ($_GET['pagination'] - 1) * 12); $i
     $str = preg_replace("/_artworkID/",$the_artwork["artworkID"],$str);
     $the_display = $the_display . $str;
 }
+//<ul class="pagination">
+//        <li><a class="" href="#">«</a></li>
+//        <li><a class="active" href="#">1</a></li>
+//
+//        <li><a href="#">3</a></li>
+//        <li><a href="#">4</a></li>
+//        <li><a href="#">5</a></li>
+//        <li><a href="#">6</a></li>
+//        <li><a href="#">7</a></li>
+//        <li><a href="#">»</a></li>
+//    </ul>
 $pagination = "";
 for($i = 1;$i <= $total_pagination; $i++)
 {
-
-
+    if($i != $_GET['pagination'])
+    $str = '<li><a onclick="getPagination(_number,\'_key\')">'. $i .'</a></li>';
+    else
+    $str = '<li><a class="active" onclick="getPagination(_number,\'_key\')">'. $i .'</a></li>';
+    $str = preg_replace("/_number/",$i,$str);
+    $str = preg_replace("/_key/",$_GET["key"],$str);
+    $pagination = $pagination . $str;
 }
-$to_echo = array("display"=>$the_display,"pagination"=>"111132424");
+$to_echo = array("display"=>$the_display,"pagination"=>$pagination);
 $to_echo_JSON = json_encode($to_echo);
 echo $to_echo_JSON;
 

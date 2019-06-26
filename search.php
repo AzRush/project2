@@ -363,6 +363,7 @@ include 'php/database_connect.php';
 <!--            <li><a href="#">7</a></li>-->
 <!--            <li><a href="#">»</a></li>-->
 <!--        </ul>-->
+
 </section>
 <div id="br"></div>
 <footer><span>Copyright © 2019 Az Rush. All rights reserved.</span></footer>

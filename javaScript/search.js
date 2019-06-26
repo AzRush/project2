@@ -11,7 +11,23 @@ function getPagination(pagination,key)
             dataType: "json",
             success:function(data)
             {
-              alert(data['display']);
+                let the_display = document.getElementById("display");
+                let the_pagination = document.getElementById("pagination");
+                if(the_display != null)the_display.remove();
+                if(the_pagination != null)the_pagination.remove();
+                let oldNode = document.getElementById("sort");
+                let newNode = document.createElement("div");
+                let parentNode = oldNode.parentNode;
+                newNode.innerHTML = data['display'];
+                newNode.id="display";
+                parentNode.insertBefore(newNode,oldNode.nextSibling);
+                oldNode = newNode;
+                newNode = document.createElement("ul");
+                parentNode = oldNode.parentNode;
+                newNode.innerHTML = data['pagination'];
+                newNode.className = "pagination";
+                newNode.id ="pagination";
+                parentNode.insertBefore(newNode,oldNode.nextSibling);
             },
             error:function(e){
                 if(e.response == "fail")
@@ -19,7 +35,7 @@ function getPagination(pagination,key)
                     let oldNode = document.getElementById("sort");
                     let newNode = document.createElement("h2");
                     let parentNode = oldNode.parentNode;
-                    newNode.innerHTML = "No result found"
+                    newNode.innerHTML = "No result found";
                     parentNode.insertBefore(newNode,oldNode.nextSibling);
                 }
                 else
