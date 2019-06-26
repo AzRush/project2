@@ -259,7 +259,7 @@ else
                 <p>Released<a href='release.php'>Release New</a></p>
                 <table>
                     <tr>
-                        <td>Title</td><td>Time released</td><td>Delete</td>
+                        <td>Title</td><td>Time released</td><td>Update</td><td>Delete</td>
                     </tr>
                     <?php
                         $sql = "SELECT * FROM artworks WHERE ownerID='_ownerID' AND orderID IS NULL";
@@ -268,7 +268,7 @@ else
                         $sql_result = mysqli_query($mysql,$sql);
                         while($row = mysqli_fetch_assoc($sql_result))
                         {
-                            $toEcho = "<tr><td><a href='release.php?artworkID=".$row["artworkID"]."'>Name</a></td><td>UploadTime</td><td><a href=# onclick= \"artwork_delete(" . $row['artworkID'] .",'" . $row['title'] ."')\">Delete</a></td></tr>";
+                            $toEcho = "<tr><td><a href='details.php?artworkID=".$row["artworkID"]."'>Name</a></td><td>UploadTime</td><td><a href='release.php?artworkID=".$row["artworkID"]."'>Update</a><td><a href=# onclick= \"artwork_delete(" . $row['artworkID'] .",'" . $row['title'] ."')\">Delete</a></td></tr>";
                             $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
                             $toEcho = preg_replace("/UploadTime/",$row['timeReleased'],$toEcho);
 
@@ -331,7 +331,7 @@ else
                         $sql_result = mysqli_query($mysql,$sql);
                         while($row = mysqli_fetch_assoc($sql_result))
                         {
-                            $toEcho = "<tr><td><a href=#>Name</a></td><td>timeSold</td><td><a href = #>Price</a></td><td><a href= # onclick='alert(ownerMessage)'>Purchaser</a></td></tr>";
+                            $toEcho = "<tr><td><a href='details.php?artworkID=".$row['artworkID']."'>Name</a></td><td>timeSold</td><td>Price$</td><td><a href= # onclick='alert(ownerMessage)'>Purchaser</a></td></tr>";
                             $toEcho = preg_replace("/Name/",$row['title'],$toEcho);
                             $toEcho = preg_replace("/Price/",$row['price'],$toEcho);
                             $sql = "SELECT * FROM orders WHERE orderID=_orderID";

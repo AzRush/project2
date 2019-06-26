@@ -234,17 +234,20 @@ include 'php/database_connect.php';
                     return {};
                 }
             })();
+            the_key = unescape($_GET['key']);
             $("#heat").bind("click",function () {
-                getPagination(1,$_GET['key']);
+                alert(the_key );
+                getPagination(1,the_key);
+
             })
             $("#timeReleased").bind("click",function () {
-                getPagination(1,$_GET['key']);
+                getPagination(1,the_key);
             })
             $("#order_inc").bind("click",function () {
-                getPagination(1,$_GET['key']);
+                getPagination(1,the_key);
             })
             $("#order_dec").bind("click",function () {
-                getPagination(1,$_GET['key']);
+                getPagination(1,the_key);
             })
         </script>
 <!--        <div id="sort">-->

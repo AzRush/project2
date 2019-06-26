@@ -11,8 +11,8 @@ function getPagination(pagination,key)
             dataType: "json",
             success:function(data)
             {
-                // alert(data['pagination']);
-                // alert(data['display']);
+                alert(data['pagination']);
+                alert(data['display']);
                 document.getElementById("pagination").innerHTML=data['pagination'];
                 document.getElementById("display").innerHTML=data['display'];
                 // let oldNode = document.getElementById("sort");
